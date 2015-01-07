@@ -14,7 +14,7 @@
 template <class T>
 class List{
 private:
-    
+    int x;
 public:
 };
 
