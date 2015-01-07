@@ -16,8 +16,8 @@ private:
     int day,month,year,hour,minute,second;
 public:
     DataTime();
-    
     ~DataTime();
+    void get_time();
 };
 
 

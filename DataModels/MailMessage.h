@@ -15,8 +15,8 @@
 class MailMessage
 {
 private:
-    int id,size;
-    string from,to,data;
+    int Id,size;
+    string from, to, data;
     DataTime mailTime;
     
 public:
