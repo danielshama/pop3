@@ -31,6 +31,12 @@ void List<T>::add(T newObj)
 }
 
 template <class T>
+T& List<T>::getObj(int objNum){
+    return array[objNum];
+}
+
+
+template <class T>
 List<T>::~List()
 {
     delete[] array;
