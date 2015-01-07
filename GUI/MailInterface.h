@@ -10,27 +10,33 @@
 #define __pop3__MailInterface__
 
 #include "Includes.h"
+#include "MailMessage.h"
+#include "User.h"
 
 class MailInterface
 {
 private:
+    string dataFileAddres;
     
 public:
     MailInterface();
+    MailInterface(string dataFile);
     
-    bool Authenticate(string user, string password);
+    void runInterFace(); // beginning the interface structer - print choices
     
-    void GetMailStatus();
+    bool Authenticate(); //Authenticates the user name and password from the txt file
     
-    void GetMailList();
+    void GetMailStatus(); //(not sure) print username, mails amount
     
-    void GetOneMail(int mailNum);
+    void GetMailList(); //print mails list
     
-    void DeleteMail(int mailNum);
+    void GetOneMail(const int mailID);// print one mail
     
-    void RSET();
+    void DeleteMail(const int mainID); // delete one mail by id
     
-    void Quit(){ exit(0);}
+    void RSET(); // delete all and construct new one
+    
+    void Quit(){ exit(0);} // end of running
     
     ~MailInterface();
 };
