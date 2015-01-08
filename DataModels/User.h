@@ -15,7 +15,8 @@ class User
 {
 private:
     string const _userName, _passWord;
-    int if_Open;
+    int if_Open, userId;
+    static int ID;
 public:
     User(string, string, int =0);
     User(User& other);
