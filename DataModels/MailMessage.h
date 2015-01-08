@@ -20,8 +20,10 @@ private:
     EmailAddress from,to;
     string data;
     DataTime mailTime;
+    static int counter;
 public:
     MailMessage();
+    static int getMsgAmount();
     ~MailMessage();
 };
 
