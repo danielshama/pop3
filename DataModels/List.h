@@ -24,6 +24,7 @@ public:
     List();
     void add(T);
     T& getObj(int);
+    void deleteObj();
     void del(T);
     int getCount();
     ~List();
