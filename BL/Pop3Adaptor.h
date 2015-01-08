@@ -9,7 +9,10 @@
 #ifndef __pop3__Pop3Adaptor__
 #define __pop3__Pop3Adaptor__
 
-#include <stdio.h>
+#include "Includes.h"
+#include "List.h"
+#include "MailMessage.h"
+#include "User.h"
 
 /// This class responsible to fetch and management your mailbox.
 /// this implemenation will the mail box stoarge will base on a file systems.
@@ -17,9 +20,12 @@
 class Pop3Adaptor
 {
 private:
-    // what ever you need.
+    List<MailMessage> *msgList;
+    List<User> *userList;
     
 public:
+    
+    Pop3Adaptor(string dataFile);
     
     /* USER userid
      This must be the first command after the connect.
