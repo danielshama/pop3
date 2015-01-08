@@ -20,6 +20,7 @@ private:
     EmailAddress from,to;
     string data;
     DataTime mailTime;
+    bool marked; // init false, true is for delete in quit
     static int counter;
 public:
     MailMessage();
