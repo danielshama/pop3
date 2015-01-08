@@ -18,6 +18,7 @@ private:
     int if_Open, userId;
     static int ID;
 public:
+    User();
     User(string, string, int =0);
     User(User& other);
     string getUserName();

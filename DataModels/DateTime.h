@@ -11,13 +11,21 @@
 
 #include <stdio.h>
 
-class DataTime{
+class DateTime{
 private:
     int day,month,year,hour,minute,second;
 public:
-    DataTime();
-    ~DataTime();
+    DateTime();
     void get_time();
+    void setDay(int d){day = d;}
+    void setMonth(int m){month =m;}
+    void setYear(int y){ year=y;}
+    void setHour(int h){hour=h;}
+    void setMinute(int m){minute=m;}
+    void setSecond(int s){second=s;}
+    void setTime(int _day,int _mounth, int _year, int _hour, int _min, int _sec);
+    ~DateTime();
+    
 };
 
 
