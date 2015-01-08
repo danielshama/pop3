@@ -24,19 +24,19 @@ public:
     
     void runInterFace(); // beginning the interface structer - print choices
     
-    bool Authenticate(); //Authenticates the user name and password from the txt file
+    bool Authenticate(string userName, string passWord); // Authenticates the user name and password from the txt file
     
-    void GetMailStatus(); //(not sure) print username, mails amount
+    string GetMailStatus(); // +ok, mail amount, total byte amount
     
     void GetMailList(); //print mails list
     
     void GetOneMail(const int mailID);// print one mail
     
-    void DeleteMail(const int mainID); // delete one mail by id
+    void DeleteMail(const int mainID); // marked msg to true by id
     
-    void RSET(); // delete all and construct new one
+    void RSET( ); // reset all marked to false
     
-    void Quit(){ exit(0);} // end of running
+    void Quit(){ exit(0);} // delete all marked msg and end of running
     
     ~MailInterface();
 };
