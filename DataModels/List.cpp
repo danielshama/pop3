@@ -19,14 +19,15 @@ template <class T>
 void List<T>::add(T newObj)
 {
     if(count % N == 0 && count != 0){
-        T newArr = new T[count+N];
+        T *newArr = new T[count+N];
         for(int i=0 ; i<count ; i++){
             newArr[i]=array[i];
         }
         delete[] array;
         array = newArr;
-    }else array[count] = newObj;
-    
+        delete[] newArr;
+    }
+    array[count] = newObj;
     count++;
 }
 
