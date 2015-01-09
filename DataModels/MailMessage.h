@@ -17,13 +17,14 @@ class MailMessage
 {
 private:
     int Id,size;
-    EmailAddress from,to;
+    string from,to;
     string data;
-    DataTime mailTime;
+    DateTime mailTime;
     bool marked; // init false, true is for delete in quit
     static int counter;
 public:
     MailMessage();
+    MailMessage(int ID,string from,string to,string data, DateTime mailT); // need to calculat the size
     static int getMsgAmount();
     ~MailMessage();
 };
