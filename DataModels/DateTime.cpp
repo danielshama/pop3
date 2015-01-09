@@ -7,3 +7,27 @@
 //
 
 #include "DateTime.h"
+
+DataTime::DataTime()
+{
+    day = month = year = hour = minute = second = 0;
+}
+
+DataTime::DataTime(int yr, int mn, int dy, int hr, int mt, int sc)
+{
+    year = yr;
+    month = mn;
+    day = dy;
+    hour = hr;
+    minute = mt;
+    second = sc;
+}
+
+string *DataTime::get_time()
+{
+    string *str = new string();
+    if (day < 10)
+    {
+        str->
+    }
+}

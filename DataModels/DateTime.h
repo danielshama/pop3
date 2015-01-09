@@ -9,15 +9,26 @@
 #ifndef __pop3__DataTime__
 #define __pop3__DataTime__
 
-#include <stdio.h>
+#include <iostream>
+#include <string>
+
+using namespace std;
 
 class DataTime{
+    
 private:
+    
     int day,month,year,hour,minute,second;
+    
 public:
+    
+    DataTime(int, int, int, int, int, int);
+    
     DataTime();
+    
     ~DataTime();
-    void get_time();
+    
+    string *get_time();
 };
 
 
