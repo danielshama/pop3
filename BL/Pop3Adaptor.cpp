@@ -8,7 +8,7 @@
 
 #include "Pop3Adaptor.h"
 
-
+/*
 Pop3Adaptor::Pop3Adaptor(string dataFile){
     
 }
@@ -54,3 +54,4 @@ const char* Pop3Adaptor::RSET(){
 const char* Pop3Adaptor::QUIT(){
     
 }
+*/
