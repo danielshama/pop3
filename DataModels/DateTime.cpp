@@ -23,11 +23,3 @@ DateTime::DateTime(int yr, int mn, int dy, int hr, int mt, int sc)
     second = sc;
 }
 
-string *DataTime::get_time()
-{
-    string *str = new string();
-    if (day < 10)
-    {
-        str->
-    }
-}
