@@ -49,6 +49,7 @@ void DataReader::readFromData(){
             Msgs.add(mailMsg);
             
         }
+        _user.setUser(_userName, _password);
         
     }
     

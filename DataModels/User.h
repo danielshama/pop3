@@ -24,7 +24,11 @@ private:
 public:
     User();
     User(string, string, int =0);
-    User(User& other);
+    User(const User& other);
+    void setUser(string name, string password);
+    void setUserName(string);
+    void setMsgList(List<MailMessage>);
+    void setPassword(string);
     string getUserName();
     string getPassword();
     List<MailMessage> *get_mails();

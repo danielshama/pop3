@@ -18,13 +18,13 @@ class DataReader{
 private:
     string dataAddres;
     List<MailMessage> Msgs;
-    User _user;
+    List<User> _users;
     
     void readFromData();
     DateTime calculDateTime(string);
 public:
     DataReader(string);
-    User& getUsers(){ return _user;}
+    User& getUser(int userID);
     List<MailMessage>& getMailBox(){ return Msgs; }
 };
 

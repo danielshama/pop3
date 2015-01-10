@@ -24,6 +24,7 @@ private:
     
 public:
     DateTime();
+    DateTime(const DateTime& other);
     void get_time();
     void setDay(int d){day = d;}
     void setMonth(int m){month =m;}

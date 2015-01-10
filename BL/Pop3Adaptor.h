@@ -28,7 +28,7 @@ private:
     List<User> *userList;
     
 public:
-    
+    /* pop3Adaptor constractor. need the address of the data file*/
     Pop3Adaptor(string dataFile);
     
     /* USER userid
