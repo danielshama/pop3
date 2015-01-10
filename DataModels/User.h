@@ -10,19 +10,24 @@
 #define __pop3__User__
 
 #include "Includes.h"
+#include "List.h"
+#include "MailMessage.h"
+
 
 class User
 {
 private:
     string const _userName, _passWord;
     int if_Open, userId;
-    static int ID;
+    List<MailMessage> *mails; //each user holds his list of mails
+    static int ID;  //what is that?
 public:
     User();
     User(string, string, int =0);
     User(User& other);
     string getUserName();
     string getPassword();
+    List<MailMessage> *get_mails();
     ~User();
 };
 bool operator==(const User& user1, const User& user2);

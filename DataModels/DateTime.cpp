@@ -8,12 +8,12 @@
 
 #include "DateTime.h"
 
-DataTime::DataTime()
+DateTime::DateTime()
 {
     day = month = year = hour = minute = second = 0;
 }
 
-DataTime::DataTime(int yr, int mn, int dy, int hr, int mt, int sc)
+DateTime::DateTime(int yr, int mn, int dy, int hr, int mt, int sc)
 {
     year = yr;
     month = mn;

@@ -12,11 +12,29 @@
 Pop3Adaptor::Pop3Adaptor(string dataFile){
     
 }
-const char* Pop3Adaptor::User(const char* userId){
-
+const char* Pop3Adaptor::User(const char* userId)//needs to think about the option of getting the fuul adres "username@gmail.com"
+{
+    string temp(userId);
+    int num = userList->getCount();
+    for (int i = 0; i <= num; ++i)
+    {
+        if ((userList->getObj(i).getUserName().compare(temp)) == 0)
+        {
+            userNum = i;
+            return "+OK";
+        }
+    }
+    return "-OK";
 }
-const char* Pop3Adaptor::PASS (const char* password){
-    
+const char* Pop3Adaptor::PASS (const char* password)
+{
+    string temp(password);
+    if ((userList->getObj(userNum).getPassword().compare(temp)) == 0)
+    {
+        msgList = userList->getObj(userNum).get_mails();
+        return "+OK";
+    }
+    return "-OK";
 }
 const char* Pop3Adaptor::STAT (){
     

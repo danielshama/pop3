@@ -9,6 +9,8 @@
 #ifndef __pop3__emailAddress__
 #define __pop3__emailAddress__
 
+
+//why we need that for?, there is alredy a class of user (which holds the user name and password), so you can compare it to that
 #include "Includes.h"
 class EmailAddress
 {

@@ -14,12 +14,16 @@
 #include "MailMessage.h"
 #include "User.h"
 
-/// This class responsible to fetch and management your mailbox.
-/// this implemenation will the mail box stoarge will base on a file systems.
+// This class responsible to fetch and management your mailbox.
+// this implemenation will the mail box stoarge will base on a file systems.
+// it needs to take all the info from the "user list" and "mail list"
+
+/* steps: first it needs to get the username - it checks if its exist in the user's list, then the password- confirms it with that user password */
 
 class Pop3Adaptor
 {
 private:
+    int userNum;
     List<MailMessage> *msgList;
     List<User> *userList;
     
