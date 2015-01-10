@@ -10,17 +10,24 @@
 #define __pop3__User__
 
 #include "Includes.h"
+#include "List.h"
+#include "MailMessage.h"
 
 class User
 {
 private:
     string const _userName, _passWord;
     int if_Open, userId;
-    static int ID;
+    static int Count;
+    List<MailMessage> msgsList;
 public:
     User();
     User(string, string, int =0);
-    User(User& other);
+    User(const User& other);
+    void setUser(string name, string password);
+    void setUserName(string);
+    void setMsgList(List<MailMessage>);
+    void setPassword(string);
     string getUserName();
     string getPassword();
     ~User();

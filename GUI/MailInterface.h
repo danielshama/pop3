@@ -12,14 +12,17 @@
 #include "Includes.h"
 #include "MailMessage.h"
 #include "User.h"
+#include "resultSupplyer.h"
+#include "Pop3Adaptor.h"
 
 class MailInterface
 {
 private:
     string dataFileAddres;
+    ResultSupplyer _resultSupp;
     
 public:
-    MailInterface();
+    //MailInterface();
     MailInterface(string dataFile);
     
     void runInterFace(); // beginning the interface structer - print choices

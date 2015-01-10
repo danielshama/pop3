@@ -8,4 +8,9 @@
 
 #include "MailInterface.h"
 
+bool MailInterface::Authenticate(string userName, string passWord){
+    bool answer = _resultSupp.AuthenticateUser(userName, passWord);
+    return answer;
+}
+
 //check it again
