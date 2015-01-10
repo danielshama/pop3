@@ -11,6 +11,7 @@
 
 #include "Includes.h"
 #define N 5
+
 template <class T>
 class List
 {

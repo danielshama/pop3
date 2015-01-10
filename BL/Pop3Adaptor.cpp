@@ -8,7 +8,7 @@
 
 #include "Pop3Adaptor.h"
 
-/*
+
 Pop3Adaptor::Pop3Adaptor(string dataFile){
     
 }
