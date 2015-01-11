@@ -10,7 +10,6 @@
 #define __pop3__MailMessage__
 
 #include "Includes.h"
-#include "emailAddress.h"
 #include "DateTime.h"
 
 class MailMessage
