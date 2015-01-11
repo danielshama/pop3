@@ -23,13 +23,12 @@
 class Pop3Adaptor
 {
 private:
-    int userNum;
-    List<MailMessage> *msgList;
+    int userNum; //the user's number in tje user's container
     List<User> *userList;
     
 public:
     /* pop3Adaptor constractor. need the address of the data file*/
-    Pop3Adaptor(string dataFile);
+    Pop3Adaptor(List<User>*);
     
     /* USER userid
      This must be the first command after the connect.

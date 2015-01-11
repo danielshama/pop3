@@ -29,9 +29,10 @@ public:
     void setUserName(string);
     void setMsgList(List<MailMessage>);
     void setPassword(string);
+    int get_userID();
     string getUserName();
     string getPassword();
-    List<MailMessage> *get_mails();
+    List<MailMessage>& get_mails();
     ~User();
 };
 bool operator==(const User& user1, const User& user2);

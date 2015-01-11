@@ -23,8 +23,9 @@ private:
     void readFromData();
     DateTime calculDateTime(string);
 public:
-    DataReader(string);
+    DataReader(const char**,int); //update
     User& getUser(int userID);
+    List<User> *getUserList();
     List<MailMessage>& getMailBox(){ return Msgs; }
 };
 

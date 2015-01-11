@@ -6,9 +6,12 @@
 //
 
 #include "Includes.h"
+#include "DataReader.h"
+#include "MailInterface.h"
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello helo, World!\n";
+    DataReader _dataReader(argv,argc);
+    MailInterface _mailInterFace(_dataReader.getUserList());
+    
     return 0;
 }

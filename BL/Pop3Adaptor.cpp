@@ -31,11 +31,11 @@ const char* Pop3Adaptor::PASS (const char* password)
     string temp(password);
     if ((userList->getObj(userNum).getPassword().compare(temp)) == 0)
     {
-        msgList = userList->getObj(userNum).get_mails();
         return "+OK";
     }
     return "-OK";
 }
+/*
 const char* Pop3Adaptor::STAT (){
     
 }
