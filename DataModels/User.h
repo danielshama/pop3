@@ -19,8 +19,8 @@ class User
 private:
     string const _userName, _passWord;
     int if_Open, userId;
-    List<MailMessage> *mails; //each user holds his list of mails
-    static int ID;  //what is that?
+    static int Count;
+    List<MailMessage> msgsList;
 public:
     User();
     User(string, string, int =0);
