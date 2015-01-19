@@ -17,8 +17,8 @@
 class DataReader{
 private:
     string dataAddres;
-    List<MailMessage> Msgs;
-    List<User> _users;
+    List<MailMessage> *Msgs;
+    List<User> *_users;
     
     void readFromData();
     DateTime calculDateTime(string);
@@ -26,7 +26,7 @@ public:
     DataReader(const char**,int); //update
     User& getUser(int userID);
     List<User> *getUserList();
-    List<MailMessage>& getMailBox(){ return Msgs; }
+    List<MailMessage> *getMailBox();
 };
 
 #endif /* defined(__pop3__DataReader__) */
