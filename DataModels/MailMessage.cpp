@@ -7,3 +7,23 @@
 //
 
 #include "MailMessage.h"
+
+string& MailMessage::getMsg()
+{
+    return data;
+}
+
+void MailMessage::set_marked_true()
+{
+    marked = true;
+}
+
+void MailMessage::set_marked_false()
+{
+    marked = false;
+}
+
+bool MailMessage::getMarked()
+{
+    return marked;
+}

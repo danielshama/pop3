@@ -25,6 +25,10 @@ public:
     MailMessage();
     MailMessage(int ID,string from,string to,string data, DateTime mailT); // need to calculat the size
     static int getMsgAmount();
+    string& getMsg();
+    bool getMarked();
+    void set_marked_true();
+    void set_marked_false();
     ~MailMessage();
 };
 

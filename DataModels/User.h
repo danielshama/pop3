@@ -33,6 +33,7 @@ public:
     string getUserName();
     string getPassword();
     List<MailMessage>& get_mails();
+    void deleteMarked();
     ~User();
 };
 bool operator==(const User& user1, const User& user2);

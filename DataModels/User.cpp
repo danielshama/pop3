@@ -8,7 +8,7 @@
 
 #include "User.h"
 
-List<MailMessage> *User::get_mails()
+List<MailMessage>& User::get_mails()
 {
-    return mails;
+    return msgsList;
 }
