@@ -37,4 +37,6 @@ public:
 };
 bool operator==(const User& user1, const User& user2);
 
+
+
 #endif /* defined(__pop3__User__) */

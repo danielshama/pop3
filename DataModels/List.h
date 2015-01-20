@@ -28,8 +28,44 @@ public:
     void deleteObj();
     void del(T);
     int getCount();
+    T& operator[](int i); // update
+    T& operator[](int i) const;//
     ~List();
     
 };
 
+
+template <class T>
+List<T>::List(): count(0)
+{
+    array = new T[N];
+}
+
+
+template <class T>
+void List<T>::add(T newObj)
+{
+    if(count % N == 0 && count != 0){
+        T *newArr = new T[count+N];
+        for(int i=0 ; i<count ; i++){
+            newArr[i]=array[i];
+        }
+        delete[] array;
+        array = newArr;
+        delete[] newArr;
+    }
+    array[count] = newObj;
+    count++;
+}
+
+template <class T>
+T& List<T>::getObj(int objNum){
+    return array[objNum];
+}
+
+template <class T>
+List<T>::~List()
+{
+    delete[] array;
+}
 #endif /* defined(__pop3__List__) */
