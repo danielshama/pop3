@@ -9,9 +9,9 @@
 #include "Pop3Adaptor.h"
 
 
-Pop3Adaptor::Pop3Adaptor(string dataFile){
+/*Pop3Adaptor::Pop3Adaptor(List<User>* users){
     
-}
+}*/
 const char* Pop3Adaptor::User(const char* userId)//needs to think about the option of getting the fuul adres "username@gmail.com"
 {
     string temp(userId);
