@@ -16,17 +16,17 @@
 
 class DataReader{
 private:
-    string dataAddres;
-    List<MailMessage> Msgs;
-    List<User> _users;
+    const char** dataAddres;
+    //List<MailMessage> *Msgs;
+    List<User> *_users;
     
-    void readFromData();
+    void readFromData(int);
     DateTime calculDateTime(string);
 public:
     DataReader(const char**,int); //update
     User& getUser(int userID);
     List<User> *getUserList();
-    List<MailMessage>& getMailBox(){ return Msgs; }
+    List<MailMessage> *getMailBox(int);
 };
 
 #endif /* defined(__pop3__DataReader__) */
