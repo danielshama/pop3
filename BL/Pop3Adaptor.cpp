@@ -15,80 +15,77 @@
 //}
 const char* Pop3Adaptor::User(const char* userId)//needs to think about the option of getting the fuul adres "username@gmail.com"
 {
-    string temp(userId);
+    _result.assign(userId);
     int num = userList->getCount();
     for (int i = 0; i <= num; ++i)
     {
-        if ((userList->getObj(i).getUserName().compare(temp)) == 0)
+        if ((userList->getObj(i).getUserName().compare(_result)) == 0)
         {
             userNum = i;
-            return "+OK";
+            _result.assign("+OK");
+            return _result.c_str();
         }
     }
-    return "-OK";
+    _result.assign("-OK");
+    return _result.c_str();
 }
 const char* Pop3Adaptor::PASS (const char* password)
 {
-    string temp(password);
-    if ((userList->getObj(userNum).getPassword().compare(temp)) == 0)
+    _result.assign(password);
+    if ((userList->getObj(userNum).getPassword().compare(_result)) == 0)
     {
-        return "+OK";
+        _result.assign("+OK");
+        return _result.c_str();
     }
-    return "-OK";
+    _result.assign("-OK");
+    return _result.c_str();
 }
 
 const char* Pop3Adaptor::STAT ()
 {
-    delete res;
-    string result = "+OK ";
+    _result.assign("+OK ");
     ostringstream convert;
     convert << userList->getObj(userNum).get_mails().getCount();
-    result += convert.str();
-    result += " ";
+    _result += convert.str();
+    _result += " ";
     convert.clear();
     convert << sizeof(userList->getObj(userNum).get_mails());
-    result += convert.str();
-    res = new char[result.length() + 1];
-    strcpy(res, result.c_str());
-    return res;
+    _result += convert.str();
+    return _result.c_str();
 }
 
 const char* Pop3Adaptor::LIST()
 {
-    delete res;
     ostringstream convert;
-    string result = "+OK ";
+    _result.assign("+OK ");
     List<MailMessage> mails = userList->getObj(userNum).get_mails();
     convert << mails.getCount();
-    result += convert.str();
-    result += " messages\n";
+    _result += convert.str();
+    _result += " messages\n";
     for (int i = 0; i < mails.getCount(); ++i)
     {
         convert.clear();
         convert << i;
-        result += convert.str();
-        result += " ";
+        _result += convert.str();
+        _result += " ";
         convert.clear();
         convert << sizeof(mails.getObj(i));
-        result += convert.str();
-        result += "\n";
+        _result += convert.str();
+        _result += "\n";
     }
-    res = new char[result.length() + 1];
-    strcpy(res, result.c_str());
-    return res;
+    return _result.c_str();
 }
 
 const char* Pop3Adaptor::RETR(int msgNumber)
 {
-    delete res;
-    string result = userList->getObj(userNum).get_mails().getObj(msgNumber).getMsg();
-    res = new char[result.length() + 1];
-    strcpy(res, result.c_str());
-    return res;
+    _result.assign(userList->getObj(userNum).get_mails().getObj(msgNumber).getMsg());
+    return _result.c_str();
 }
 
 const char* Pop3Adaptor::DELE(int msgNumber)
 {
+    if (msgNumber > userList->getObj(userNum).get_mails().getCount())
+        return "-OK";
     userList->getObj(userNum).get_mails().getObj(msgNumber).set_marked_true();
     return "+OK";
 }

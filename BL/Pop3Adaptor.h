@@ -26,7 +26,7 @@ class Pop3Adaptor
 private:
     int userNum; //the user's number in tje user's container
     List<User> *userList;
-    char *res;
+    string _result;
 public:
     /* pop3Adaptor constractor. need the address of the data file*/
     Pop3Adaptor(List<User>* user) {userList = user;}
