@@ -23,6 +23,7 @@ private:
 public:
     
     List();
+    List(int amount);
     void add(T);
     T& getObj(int);
     void deleteObj();

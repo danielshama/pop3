@@ -56,17 +56,21 @@ void User::setMsgList(List<MailMessage> *list)
     msgsList = list;
 }
 
-void User::deleteMarked()
-{
-    int counter = 0;
-    int i = msgsList->getCount();
-    for (; i > 0; --i)
-    {
-        if (msgsList->getObj(i).getMarked())
-            ++counter;
-    }
-    if (counter > 0)
-    {
-        
-    }
-}
+//void User::deleteMarked()//don't know how to do that!!!
+//{
+//    int counter = 0;
+//    int i = msgsList->getCount();
+//    for (; i > 0; --i)
+//    {
+//        if (msgsList->getObj(i).getMarked())
+//            ++counter;
+//    }
+//    if (counter > 0)
+//    {
+//        List<MailMessage> *newList = new List<MailMessage>[msgsList->getCount() - counter];
+//        for (int j = 0; j < msgsList->getCount() - counter; ++j)
+//        {
+//            
+//        }
+//    }
+//}
