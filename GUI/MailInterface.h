@@ -22,7 +22,7 @@ private:
     
 public:
     //MailInterface();
-    MailInterface(List<User>*);
+    MailInterface(User);
     
     void runInterFace(); // beginning the interface structer - print choices
     

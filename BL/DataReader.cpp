@@ -48,7 +48,9 @@ void DataReader::readFromData(){
             }
         myData.close();
         }
+        _user.setMsgList(&tmpMsgsList);
     }
+    
     
 }
 //01012013230535

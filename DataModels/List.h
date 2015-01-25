@@ -45,7 +45,7 @@ bool List<T>::empty()
 }
 
 template <class T>
-int List<T>::size()
+int List<T>::getAmount()
 {
     return p->getAmount();
 }
