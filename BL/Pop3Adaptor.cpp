@@ -9,22 +9,13 @@
 #include "Pop3Adaptor.h"
 
 
-//Pop3Adaptor::Pop3Adaptor(List<User> *user)
-//{
-//    userList = user;
-//}
 const char* Pop3Adaptor::User(const char* userId)//needs to think about the option of getting the fuul adres "username@gmail.com"
 {
     _result.assign(userId);
-    int num = userList->getCount();
-    for (int i = 0; i <= num; ++i)
+    if (_user->getUserName().compare(_result) == 0)
     {
-        if ((userList->getObj(i).getUserName().compare(_result)) == 0)
-        {
-            userNum = i;
-            _result.assign("+OK");
-            return _result.c_str();
-        }
+        _result.assign("+OK");
+        return _result.c_str();
     }
     _result.assign("-OK");
     return _result.c_str();
@@ -32,7 +23,7 @@ const char* Pop3Adaptor::User(const char* userId)//needs to think about the opti
 const char* Pop3Adaptor::PASS (const char* password)
 {
     _result.assign(password);
-    if ((userList->getObj(userNum).getPassword().compare(_result)) == 0)
+    if (_user->getPassword().compare(_result))
     {
         _result.assign("+OK");
         return _result.c_str();

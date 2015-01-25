@@ -18,11 +18,10 @@ class User
 {
 private:
     string _userName, _passWord;//not able to work with const
-    int if_Open;//probably we don't need it
     int userId;
-    static int Count;
     List<MailMessage> *msgsList;
 public:
+    User();
     User(string name, string pass, int _id) {_userName = name; _passWord = pass; userId = _id;}
     User(const User&);            //
     void setUser(string, string); //
