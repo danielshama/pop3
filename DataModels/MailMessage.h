@@ -15,21 +15,13 @@
 class MailMessage
 {
 private:
-    int _Id,_size; //what is size?
+    int _Id;
     string _from,_to;
     string _data;
     DateTime _mailTime;
-    bool marked; // init false, true is for delete in quit
-    static int counter;
 public:
-    MailMessage(int ID,string from,string to,string data, DateTime mailT); // need to calculate the size
-    static int getMsgAmount();
-    string& getMsg(); //
-    bool getMarked(); //
-    void set_marked_true(); //
-    void set_marked_false(); //
-    void operator=(const MailMessage&);//we have to do it for the delete in user's mails list. not shure if we need it because it doesn't have any dynamic memory
-    ~MailMessage();
+    MailMessage(int ID,string from,string to,string data, DateTime mailT);
+    const string& getMsg();
 };
 
 #endif /* defined(__pop3__MailMessage__) */

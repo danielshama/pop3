@@ -36,11 +36,16 @@ const char* Pop3Adaptor::STAT ()
 {
     _result.assign("+OK ");
     ostringstream convert;
-    convert << userList->getObj(userNum).get_mails().getCount();
+    convert << _user->get_mails().getAmount();
     _result += convert.str();
     _result += " ";
     convert.clear();
-    convert << sizeof(userList->getObj(userNum).get_mails());
+    long long int _size = 0;
+    for (int i = 1; i <= _user->get_mails().getAmount(); ++i)
+    {
+        _size = sizeof(_user->get_mails().getObj(i));
+    }
+    convert << _size;
     _result += convert.str();
     return _result.c_str();
 }
@@ -49,18 +54,20 @@ const char* Pop3Adaptor::LIST()
 {
     ostringstream convert;
     _result.assign("+OK ");
-    List<MailMessage> mails = userList->getObj(userNum).get_mails();
-    convert << mails.getCount();
+    convert << _user->get_mails().getAmount();
     _result += convert.str();
     _result += " messages\n";
-    for (int i = 0; i < mails.getCount(); ++i)
+    if (_user->get_mails().empty())
+        return _result.c_str();
+    for (int i = 1; i <= _user->get_mails().getAmount(); ++i)
     {
         convert.clear();
         convert << i;
         _result += convert.str();
         _result += " ";
         convert.clear();
-        convert << sizeof(mails.getObj(i));
+        long long _size = sizeof(_user->get_mails().getObj(i));
+        convert << _size;
         _result += convert.str();
         _result += "\n";
     }
@@ -69,31 +76,40 @@ const char* Pop3Adaptor::LIST()
 
 const char* Pop3Adaptor::RETR(int msgNumber)
 {
-    _result.assign(userList->getObj(userNum).get_mails().getObj(msgNumber).getMsg());
+    _result.assign(_user->get_mails().getObj(msgNumber).getMsg());
     return _result.c_str();
 }
 
 const char* Pop3Adaptor::DELE(int msgNumber)
 {
-    if (msgNumber > userList->getObj(userNum).get_mails().getCount())
-        return "-OK";
-    userList->getObj(userNum).get_mails().getObj(msgNumber).set_marked_true();
-    return "+OK";
+    if (_user->get_mails().getAmount() < msgNumber)
+    {
+        _result.assign("-OK");
+        return _result.c_str();
+    }
+    _user->get_mails().markForRemove(msgNumber);
+    _result.assign("+OK");
+    return _result.c_str();
 }
 
 const char* Pop3Adaptor::RSET()
 {
-    int i = userList->getObj(userNum).get_mails().getCount();
-    for (;i > 0; --i)
+    if (_user->get_mails().empty())
     {
-        if (!(userList->getObj(userNum).get_mails().getObj(i).getMarked()))
-            userList->getObj(userNum).get_mails().getObj(i).set_marked_false();
+        _result.assign("+OK");
+        return _result.c_str();
     }
-    return "+OK";
-}
-const char* Pop3Adaptor::QUIT()
-{
-    userList->getObj(userNum).deleteMarked();
-    return "+OK";
+    for (int i = 1; i <= _user->get_mails().getAmount(); ++i)
+    {
+        _user->get_mails().clearMarks(i);
+    }
+    _result.assign("+OK");
+    return _result.c_str();
 }
 
+const char* Pop3Adaptor::QUIT()
+{
+    _user->get_mails().remove();
+    _result.assign("+OK");
+    return _result.c_str();
+}

@@ -53,7 +53,6 @@ int List<T>::getAmount()
 template <class T>
 void List<T>::insert(T newD)
 {
-    Node<T> *q,*t;
     if (p == NULL)
     {
         p = new Node<T>(newD);

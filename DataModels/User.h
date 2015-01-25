@@ -32,11 +32,6 @@ public:
     string const getUserName();   //
     string const getPassword();   //
     List<MailMessage>& get_mails();//
-    void deleteMarked();
     ~User();
 };
-bool operator==(const User& user1, const User& user2);
-
-
-
 #endif /* defined(__pop3__User__) */

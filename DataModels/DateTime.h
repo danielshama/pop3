@@ -32,7 +32,7 @@ public:
     void setHour(int h){hour=h;}
     void setMinute(int m){minute=m;}
     void setSecond(int s){second=s;}
-    void setTime(int _day,int _mounth, int _year, int _hour, int _min, int _sec);
+    void setTime(int, int, int, int , int, int);
     ~DateTime();
     
     DateTime(int, int, int, int, int, int);

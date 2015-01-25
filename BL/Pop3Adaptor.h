@@ -90,5 +90,7 @@ public:
      */
     const char* QUIT();
     
+    const char* displaySum();
+    
 };
 #endif /* defined(__pop3__Pop3Adaptor__) */

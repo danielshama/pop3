@@ -23,3 +23,14 @@ DateTime::DateTime(int yr, int mn, int dy, int hr, int mt, int sc)
     second = sc;
 }
 
+void DateTime::setTime(int _day, int _month, int _year, int _hour, int _min, int _sec)
+{
+    day = _day;
+    month = _month;
+    year = _year;
+    hour = _hour;
+    minute = _min;
+    second = _sec;
+}
+
+
