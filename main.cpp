@@ -10,7 +10,7 @@
 #include "MailInterface.h"
 
 int main(int argc, const char * argv[]) {
-    DataReader _dataReader(argv,argc);
+    DataReader _dataReader(argv[0]);
     MailInterface _mailInterFace(_dataReader.getUserList());
     
     return 0;

@@ -19,7 +19,11 @@ class MailInterface
 {
 private:
     Pop3Adaptor _pop3;
+    int steps;
+    bool login;
     
+    int printMenu(int);
+    void makeAstep(int);
 public:
     //MailInterface();
     MailInterface(User);
@@ -38,7 +42,7 @@ public:
     
     void RSET( ); // reset all marked to false
     
-    void Quit(){ exit(0);} // delete all marked msg and end of running
+    void Quit(); // delete all marked msg and end of running
     
     ~MailInterface();
 };
