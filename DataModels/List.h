@@ -24,7 +24,7 @@ public:
     
     List();               //constructor
     bool empty();               //returns true if the list is empty, false otherwise
-    int size();                 //returns the number of elements in the list
+    int size();                 //returns the number of nodes
     void insert(T d); //inserts a node before the current node
     void clearMarks(int);
     void markForRemove(int);
