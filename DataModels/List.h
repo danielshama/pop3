@@ -10,88 +10,127 @@
 #define __pop3__List__
 
 #include "Includes.h"
-#define N 5
+#include "Node.h"
 
+
+//a circular doubly-linked list
 template <class T>
 class List
 {
 private:
-    
-    T *array;
-    int count;
-    
+    Node<T> *p;        //reference to the current node
+    Node<T> *head;
 public:
     
-    List();
-    List(int amount);
-    void add(T);
-    T& getObj(int);
-    void deleteObj();
-    void del(T);
-    int getCount();
-    T& operator[](int i); // update
-    T& operator[](int i) const;//
-    ~List();
-    
+    List();               //constructor
+    bool empty();               //returns true if the list is empty, false otherwise
+    int size();                 //returns the number of elements in the list
+    void insert(T d); //inserts a node before the current node
+    void clearMarks(int);
+    void markForRemove(int);
+    T& getObj(int);             //returns the data of the node
+    void remove();              //remove items that marked
+    void printOne(int);        //displays
 };
 
-
 template <class T>
-List<T>::List(): count(0)
+List<T>::List(): p(NULL), head(p)
 {
-    array = new T[N];
 }
 
 template <class T>
-void List<T>::add(T newObj)
+bool List<T>::empty()
 {
-    if(count % N == 0 && count != 0){
-        T *newArr = new T[count+N];
-        for(int i=0 ; i<count ; i++){
-            newArr[i]=array[i];
-        }
-        delete[] array;
-        array = newArr;
-        delete[] newArr;
+    if (p == NULL) return true;
+    else return false;
+}
+
+template <class T>
+int List<T>::size()
+{
+    if (p == NULL)return 0;
+    if (p->next == p)return 1;
+    else return p->getAmount();
+}
+
+template <class T>
+void List<T>::insert(T newD)
+{
+    Node<T> *q,*t;
+    if (p == NULL)
+    {
+        p = new Node<T>(newD);
+        head=p;
+        p->next = p;
+        p->prev = p;
+        //cout << d << " inserted.\n";
     }
-    array[count] = newObj;
-    count++;
+    else
+    {
+        p->next = new Node<T>(newD);
+        p->next->prev = p;
+        head->prev = p->next;
+        p->next->next = NULL;
+        p = p->next;
+    }
 }
 
-template <class T>
-T& List<T>::getObj(int objNum){
-    return array[objNum];
-}
 
 template <class T>
-List<T>::~List()
+T& List<T>::getObj(int objId)
 {
-    delete[] array;
+    Node<T> *t = head;
+    
+    while(t != NULL){
+        if(t->getObjId() == objId)
+            return t->getDataObj();
+        t = t->next;
+    }
+    return NULL;
 }
 
 template <class T>
-void List<T>::deleteObj(){
-    
+void List<T>::remove()
+{
+    Node<T> *t =head;
+    while(t!=NULL){
+        if(t->ifForRemove()){
+            if(t==head) head = t->next;
+            t->next->prev = t->prev;
+            t->prev->next = t->next;
+            t->~Node();
+        }
+        t=t->next;
+    }
 }
 
 template <class T>
-void List<T>::del(T){
+void List<T>::clearMarks(int objId){
+    Node<T> *t = head;
     
+    while(t != NULL){
+        if(t->getObjId() == objId){
+            t->clearMarks();
+            return;
+        }
+        t = t->next;
+    }
 }
 
 template <class T>
-int List<T>::getCount(){
+void List<T>::printOne(int objId)
+{
+    Node<T> *t = head;
     
+    while(t != NULL){
+        if(t->getObjId() == objId){
+            t->print();
+            return;
+        }
+        t = t->next;
+    }
+    cout<< "No OBJ" << endl;
 }
 
-template <class T>
-T& List<T>::operator[](int i){
-    
-}
-
-template <class T>
-T& List<T>::operator[](int i) const{
-    
-}
 
 #endif /* defined(__pop3__List__) */
