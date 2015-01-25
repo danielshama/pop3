@@ -9,7 +9,7 @@
 #include "Pop3Adaptor.h"
 
 
-const char* Pop3Adaptor::User(const char* userId)//needs to think about the option of getting the fuul adres "username@gmail.com"
+const char* Pop3Adaptor::User(const char* userId)
 {
     if (_user->getUserName().substr(strlen(userId),1) != "@")
     {
