@@ -16,7 +16,6 @@
 
 class DataReader{
 private:
-    string dataAddres;
     const string dataAddres;
     //List<MailMessage> *Msgs;
     User _user;
