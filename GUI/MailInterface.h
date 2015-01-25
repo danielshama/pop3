@@ -14,6 +14,7 @@
 #include "User.h"
 #include "Pop3Adaptor.h"
 #include "List.h"
+#include <fstream>
 
 class MailInterface
 {
@@ -30,15 +31,15 @@ public:
     
     void runInterFace(); // beginning the interface structer - print choices
     
-    bool Authenticate(string userName, string passWord); // Authenticates the user name and password from the txt file
+    bool Authenticate(const char* userName, const char* passWord); // Authenticates the user name and password from the txt file
     
-    string GetMailStatus(); // +ok, mail amount, total byte amount
+    void GetMailStatus(); // +ok, mail amount, total byte amount
     
     void GetMailList(); //print mails list
     
-    void GetOneMail(const int mailID);// print one mail
+    void GetOneMail();// print one mail
     
-    void DeleteMail(const int mainID); // marked msg to true by id
+    void DeleteMail(); // marked msg to true by id
     
     void RSET( ); // reset all marked to false
     

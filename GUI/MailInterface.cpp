@@ -36,13 +36,17 @@ void MailInterface::makeAstep(int act){
                 break;
             }
             bool ans = false;
-            string userName,password, tryAgin="";
+            char* userName;
+            char* password;
+            string tryAgin="";
             while(ans == false){
                 cout << "Login : " << endl << "Username: " << endl;
                 cin >> userName;
                 cout << "Password: " << endl;
                 cin >> password;
-                ans = Authenticate(userName, password);
+                const char* x = userName;
+                const char* y = password;
+                ans = Authenticate(x, y);
                 if(ans == false){
                     while(tryAgin != "y" && tryAgin != "Y"){
                         cout << "Try again? y/n" << endl;
@@ -54,29 +58,27 @@ void MailInterface::makeAstep(int act){
             break;
         }
         case 2:{
-            string tmp =_pop3.STAT();
-            cout << tmp << endl;
+            GetMailStatus();
             break;
         }
         case 3:{
-            string tmp =_pop3.LIST();
-            cout << tmp << endl;
+            GetMailList();
             break;
         }
         case 4:{
-            int msgNum;
-            cout << "Choose message number:" << endl;
-            string tmp =_pop3.RETR(msgNum);
-            cout << tmp << endl;
+            GetOneMail();
             break;
         }
         case 5:{
+            DeleteMail();
             break;
         }
         case 6:{
+            RSET();
             break;
         }
         case 7:{
+            Quit();
             break;
         }
         default:{
@@ -110,39 +112,91 @@ int MailInterface::printMenu(int opt){
                 if ( answer >=1 || answer <=7) return answer;
                 break;
         }
-    }
-}
-
-bool MailInterface::Authenticate(string userName, string passWord){
-
-}
-
-string MailInterface::GetMailStatus(){
     
+    }
+    return 1;
+}
+bool MailInterface::Authenticate(const char* userName, const char* passWord){
+    string user =_pop3.User(userName);
+    string pass=_pop3.PASS(passWord);
+    
+    if( user== "+OK" && pass=="+OK"){
+        return true;
+    }else return false;
+
+}
+
+void MailInterface::GetMailStatus(){
+    string tmp =_pop3.STAT();
+    cout << tmp << endl;
 }
 
 void MailInterface::GetMailList(){
-    
+    string tmp=_pop3.STAT(), ok;
+    ok.assign(tmp,4,1);
+    if(ok == "0"){
+        cout<< "Mailbox is empty" << endl;
+        return;
+    }
+    string tmpe =_pop3.LIST();
+    cout << tmpe << endl;
 }
 
-void MailInterface::GetOneMail(const int mailID){
-    
+void MailInterface::GetOneMail(){
+    int msgNum;
+    string tmp=_pop3.STAT(), ok;
+    ok.assign(tmp,4,1);
+    if(ok == "0"){
+        cout<< "Mailbox is empty" << endl;
+        return;
+    }
+    while(ok != "0"){
+        tmp = _pop3.displaySum();
+        cout<< tmp << endl;
+        cout << "Choose message number:" << endl;
+        cin >> msgNum;
+        tmp =_pop3.RETR(msgNum);
+        if(tmp[0] == '-') {
+            cout << "Try again. \n" << endl;
+            continue;
+        }
+        cout << tmp << endl;
+        break;
+    }
 }
 
-void MailInterface::DeleteMail(const int mainID){
-    
+void MailInterface::DeleteMail(){
+    int msgNum;
+    string tmp=_pop3.STAT(), ok;
+    ok.assign(tmp,4,1);
+    if(ok == "0"){
+        cout<< "Mailbox is empty" << endl;
+        return;
+    }
+    while(ok != "0"){
+        tmp = _pop3.displaySum();
+        cout<< tmp << endl;
+        cout << "Choose message number:" << endl;
+        cin >> msgNum;
+        tmp =_pop3.DELE(msgNum);
+        if(tmp[0] == '-') {
+            cout << "Try again. \n" << endl;
+            continue;
+        }
+        break;
+    }
 }
 
 void MailInterface::RSET( ){
-    
+    _pop3.RSET();
+    cout << "Restart...\n" << endl;
 }
 
 void MailInterface::Quit(){
-    
+    _pop3.QUIT();
     exit(0);
 }
 
 MailInterface::~MailInterface(){
     
 }
-//check it again
