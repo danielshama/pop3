@@ -24,13 +24,13 @@
 class Pop3Adaptor
 {
 private:
-    int userNum; //the user's number in tje user's container
-    List<User> *userList;
+//    int userNum; //the user's number in tje user's container
+//    List<User> *userList;
+    User *_user;
     string _result;
 public:
     /* pop3Adaptor constractor. need the address of the data file*/
-    Pop3Adaptor(List<User>* user) {userList = user;}
-    
+    Pop3Adaptor(User *user) {_user = user;}
     /* USER userid
      This must be the first command after the connect.
      Supply your e-mail userid (this may or may not not the full e-mail address).
