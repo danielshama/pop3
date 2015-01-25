@@ -24,13 +24,14 @@ public:
     Node(T d);          //constructor
     int getAmount() const;
     T& getDataObj();
-    int getObjId();
     bool ifForRemove();
     void markForRemove();
     void clearMarks();
-    void print();
     ~Node();
 };
+
+template <class T>
+int Node<T>::count =0;
 
 template <class T>
 Node<T>::Node(T d): next(NULL),prev(NULL),data(d),forRemove(false)
@@ -46,26 +47,18 @@ int Node<T>::getAmount() const
 
 template <class T>
 T& Node<T>::getDataObj(){
-    
-}
-template <class T>
-int Node<T>::getObjId(){
-    
+    return data;
 }
 template <class T>
 bool Node<T>::ifForRemove(){
-    
+    return forRemove;
 }
 template <class T>
 void Node<T>::markForRemove(){
-    
+    forRemove = true;
 }
 template <class T>
 void Node<T>::clearMarks(){
-    
-}
-template <class T>
-void Node<T>::print(){
-    
+    forRemove=false;
 }
 #endif /* defined(__pop3__Node__) */
