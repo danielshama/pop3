@@ -9,8 +9,13 @@
 #include "Pop3Adaptor.h"
 
 
-const char* Pop3Adaptor::User(const char* userId)//needs to think about the option of getting the fuul adres "username@gmail.com"
+const char* Pop3Adaptor::User(const char* userId)
 {
+    if (_user->getUserName().substr(strlen(userId),1) != "@")
+    {
+        _result.assign("-OK");
+        return _result.c_str();
+    }
     _result.assign(userId);
     if (_user->getUserName().compare(_result) == 0)
     {
@@ -34,6 +39,11 @@ const char* Pop3Adaptor::PASS (const char* password)
 
 const char* Pop3Adaptor::STAT ()
 {
+    if (_user->get_mails().empty())
+    {
+        _result.assign("-OK");
+        return _result.c_str();
+    }
     _result.assign("+OK ");
     ostringstream convert;
     convert << _user->get_mails().getAmount();
@@ -76,6 +86,11 @@ const char* Pop3Adaptor::LIST()
 
 const char* Pop3Adaptor::RETR(int msgNumber)
 {
+    if (msgNumber > _user->get_mails().getAmount())
+    {
+        _result.assign("-OK");
+        return _result.c_str();
+    }
     _result.assign(_user->get_mails().getObj(msgNumber).getMsg());
     return _result.c_str();
 }
@@ -111,5 +126,19 @@ const char* Pop3Adaptor::QUIT()
 {
     _user->get_mails().remove();
     _result.assign("+OK");
+    return _result.c_str();
+}
+
+const char* Pop3Adaptor::displaySum()
+{
+    ostringstream convert;
+    for (int i = 1; i <= _user->get_mails().getAmount(); ++i)
+         {
+             convert << i;
+             _result += convert.str();
+             _result += "  (";
+             _result += _user->get_mails().getObj(i).getMsg().substr(0,5);
+             _result += "...)\n";
+         }
     return _result.c_str();
 }
