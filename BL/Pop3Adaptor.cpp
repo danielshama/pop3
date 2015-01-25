@@ -36,11 +36,13 @@ const char* Pop3Adaptor::STAT ()
 {
     _result.assign("+OK ");
     ostringstream convert;
-    convert << userList->getObj(userNum).get_mails().getCount();
+    convert << _user->get_mails().getAmount();
     _result += convert.str();
     _result += " ";
     convert.clear();
-    convert << sizeof(userList->getObj(userNum).get_mails());
+    long long int _size;
+    for (int i = 0; i < _user->get_mails().
+    convert << _user->get_mails().get_size;;
     _result += convert.str();
     return _result.c_str();
 }
