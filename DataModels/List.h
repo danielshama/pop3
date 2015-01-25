@@ -30,7 +30,6 @@ public:
     void markForRemove(int);
     T& getObj(int);             //returns the data of the node
     void remove();              //remove items that marked
-    void printOne(int);        //displays
 };
 
 template <class T>
@@ -48,9 +47,7 @@ bool List<T>::empty()
 template <class T>
 int List<T>::size()
 {
-    if (p == NULL)return 0;
-    if (p->next == p)return 1;
-    else return p->getAmount();
+    return p->getAmount();
 }
 
 template <class T>
@@ -80,13 +77,30 @@ template <class T>
 T& List<T>::getObj(int objId)
 {
     Node<T> *t = head;
+    int count=0;
     
     while(t != NULL){
-        if(t->getObjId() == objId)
+        if(count== objId)
             return t->getDataObj();
         t = t->next;
+        count++;
     }
     return NULL;
+}
+
+template <class T>
+void List<T>::markForRemove(int objId){
+    Node<T> *t = head;
+    int count=0;
+    
+    while(t != NULL){
+        if(count== objId){
+            t->markForRemove();
+            return;
+        }
+        t = t->next;
+        count++;
+    }
 }
 
 template <class T>
@@ -107,30 +121,17 @@ void List<T>::remove()
 template <class T>
 void List<T>::clearMarks(int objId){
     Node<T> *t = head;
-    
+    int count=0;
     while(t != NULL){
-        if(t->getObjId() == objId){
+        if(count == objId){
             t->clearMarks();
             return;
         }
         t = t->next;
+        count++;
     }
 }
 
-template <class T>
-void List<T>::printOne(int objId)
-{
-    Node<T> *t = head;
-    
-    while(t != NULL){
-        if(t->getObjId() == objId){
-            t->print();
-            return;
-        }
-        t = t->next;
-    }
-    cout<< "No OBJ" << endl;
-}
 
 
 #endif /* defined(__pop3__List__) */

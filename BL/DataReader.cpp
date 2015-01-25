@@ -10,11 +10,11 @@
 #include <fstream>
 
 
-DataReader::DataReader(const char** dataFile,int filesAmount): dataAddres(dataFile){
-    readFromData(filesAmount);
+DataReader::DataReader(const string dataFile): dataAddres(dataFile){
+    readFromData();
 }
 
-void DataReader::readFromData(int filesAmount){
+void DataReader::readFromData(){
     char tmpStr[250];
     int len;
     string _userName,_password;
@@ -22,40 +22,33 @@ void DataReader::readFromData(int filesAmount){
     int msgID=0;
     string from,to,msgContent,receivedDate;
     
-    for(int i=0 ; i<filesAmount ; i++){
-        ifstream myData(dataAddres[i]);
-        
-        
-        if(myData.is_open()){
-            List<MailMessage> tmpMsgsList;
-            while (myData.getline(tmpStr, 120)) {
-                len = (int)strlen(tmpStr);
-                if(tmpStr[0] != '#' || len > 1){
-                    if(ifTakeUser==false){
-                        _userName = strtok(tmpStr,", \n");
-                        _password = strtok(NULL,", \n");
-                        ifTakeUser=true;
-                    }else {
-                        msgID= atoi(strtok(tmpStr,", \n"));
-                        from = strtok(NULL,", \n");
-                        to = strtok(NULL,", \n");;
-                        receivedDate = strtok(NULL,", \n");
-                        msgContent = strtok(NULL,"\r\n");
-                        
-                        DateTime tmpDate = calculDateTime(receivedDate);
-                        MailMessage mailMsg(msgID,from,to,msgContent,tmpDate);
-                        tmpMsgsList.add(mailMsg);
-                    }
+    ifstream myData(dataAddres);
+    
+    
+    if(myData.is_open()){
+        List<MailMessage> tmpMsgsList;
+        while (myData.getline(tmpStr, 120)) {
+            len = (int)strlen(tmpStr);
+            if(tmpStr[0] != '#' || len > 1){
+                if(ifTakeUser==false){
+                    _userName = strtok(tmpStr,", \n");
+                    _password = strtok(NULL,", \n");
+                    ifTakeUser=true;
+                }else {
+                    msgID= atoi(strtok(tmpStr,", \n"));
+                    from = strtok(NULL,", \n");
+                    to = strtok(NULL,", \n");;
+                    receivedDate = strtok(NULL,", \n");
+                    msgContent = strtok(NULL,"\r\n");
+                    
+                    DateTime tmpDate = calculDateTime(receivedDate);
+                    MailMessage mailMsg(msgID,from,to,msgContent,tmpDate);
+                    tmpMsgsList.insert(mailMsg);
                 }
             }
-            User tmpUser(_userName,_password);
-            tmpUser.setMsgList(tmpMsgsList);
-            _users->add(tmpUser);
-        }
         myData.close();
+        }
     }
-    
-    
     
 }
 //01012013230535
@@ -76,14 +69,10 @@ DateTime DataReader::calculDateTime(string time){
     
 }
 
-User& DataReader::getUser(int userID){
-    return (*_users)[userID];
-}
-
-List<User>* DataReader::getUserList(){
-    return _users;
+User& DataReader::getUser(){
+    return _user;
 }
 
 List<MailMessage>* DataReader::getMailBox(int userId){
-    return &( (*_users)[userId].get_mails() );
+    return &( _user.get_mails() );
 }

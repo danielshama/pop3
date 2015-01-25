@@ -16,16 +16,16 @@
 
 class DataReader{
 private:
-    const char** dataAddres;
+    string dataAddres;
+    const string dataAddres;
     //List<MailMessage> *Msgs;
-    List<User> *_users;
+    User _user;
     
-    void readFromData(int);
+    void readFromData();
     DateTime calculDateTime(string);
 public:
-    DataReader(const char**,int); //update
-    User& getUser(int userID);
-    List<User> *getUserList();
+    DataReader(const string); //update
+    User& getUser();
     List<MailMessage> *getMailBox(int);
 };
 
