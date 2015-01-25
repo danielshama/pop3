@@ -41,7 +41,6 @@ List<T>::List(): count(0)
     array = new T[N];
 }
 
-
 template <class T>
 void List<T>::add(T newObj)
 {
@@ -68,4 +67,30 @@ List<T>::~List()
 {
     delete[] array;
 }
+
+template <class T>
+void List<T>::deleteObj(){
+    
+}
+
+template <class T>
+void List<T>::del(T){
+    
+}
+
+template <class T>
+int List<T>::getCount(){
+    
+}
+
+template <class T>
+T& List<T>::operator[](int i){
+    
+}
+
+template <class T>
+T& List<T>::operator[](int i) const{
+    
+}
+
 #endif /* defined(__pop3__List__) */
