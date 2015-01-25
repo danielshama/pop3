@@ -24,7 +24,7 @@ public:
     
     List();               //constructor
     bool empty();               //returns true if the list is empty, false otherwise
-    int size();                 //returns the number of nodes
+    int getAmount();                 //returns the number of elements in the list
     void insert(T d); //inserts a node before the current node
     void clearMarks(int);
     void markForRemove(int);
@@ -45,7 +45,7 @@ bool List<T>::empty()
 }
 
 template <class T>
-int List<T>::size()
+int List<T>::getAmount()
 {
     return p->getAmount();
 }
@@ -53,7 +53,6 @@ int List<T>::size()
 template <class T>
 void List<T>::insert(T newD)
 {
-    Node<T> *q,*t;
     if (p == NULL)
     {
         p = new Node<T>(newD);

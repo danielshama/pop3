@@ -7,12 +7,14 @@
 //
 
 #include "User.h"
-
+User::User()
+{
+    msgsList = NULL;
+}
 User::User(const User& other)//what to do with the id
 {
     _userName.assign(other._userName);
     _passWord.assign(other._passWord);
-    ++Count;
 }
 
 int const User::get_userID()
@@ -56,21 +58,7 @@ void User::setMsgList(List<MailMessage> *list)
     msgsList = list;
 }
 
-//void User::deleteMarked()//don't know how to do that!!!
-//{
-//    int counter = 0;
-//    int i = msgsList->getCount();
-//    for (; i > 0; --i)
-//    {
-//        if (msgsList->getObj(i).getMarked())
-//            ++counter;
-//    }
-//    if (counter > 0)
-//    {
-//        List<MailMessage> *newList = new List<MailMessage>[msgsList->getCount() - counter];
-//        for (int j = 0; j < msgsList->getCount() - counter; ++j)
-//        {
-//            
-//        }
-//    }
-//}
+User::~User()
+{
+    delete msgsList;
+}
