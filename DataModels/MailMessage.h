@@ -15,16 +15,20 @@
 class MailMessage
 {
 private:
-    int Id,size;
-    string from,to;
-    string data;
-    DateTime mailTime;
+    int _Id,_size; //what is size?
+    string _from,_to;
+    string _data;
+    DateTime _mailTime;
     bool marked; // init false, true is for delete in quit
     static int counter;
 public:
-    MailMessage();
-    MailMessage(int ID,string from,string to,string data, DateTime mailT); // need to calculat the size
+    MailMessage(int ID,string from,string to,string data, DateTime mailT); // need to calculate the size
     static int getMsgAmount();
+    string& getMsg(); //
+    bool getMarked(); //
+    void set_marked_true(); //
+    void set_marked_false(); //
+    void operator=(const MailMessage&);//we have to do it for the delete in user's mails list. not shure if we need it because it doesn't have any dynamic memory
     ~MailMessage();
 };
 

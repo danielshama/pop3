@@ -13,6 +13,7 @@
 #include "List.h"
 #include "MailMessage.h"
 #include "User.h"
+#include <sstream>
 
 // This class responsible to fetch and management your mailbox.
 // this implemenation will the mail box stoarge will base on a file systems.
@@ -25,10 +26,10 @@ class Pop3Adaptor
 private:
     int userNum; //the user's number in tje user's container
     List<User> *userList;
-    
+    string _result;
 public:
     /* pop3Adaptor constractor. need the address of the data file*/
-    Pop3Adaptor(List<User>*);
+    Pop3Adaptor(List<User>* user) {userList = user;}
     
     /* USER userid
      This must be the first command after the connect.

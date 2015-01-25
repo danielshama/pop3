@@ -17,22 +17,23 @@
 class User
 {
 private:
-    string const _userName, _passWord;
-    int if_Open, userId;
-    List<MailMessage> *mails; //each user holds his list of mails
-    static int ID;  //what is that?
+    string _userName, _passWord;//not able to work with const
+    int if_Open;//probably we don't need it
+    int userId;
+    static int Count;
+    List<MailMessage> *msgsList;
 public:
-    User();
-    User(string, string, int =0);
-    User(const User& other);
-    void setUser(string name, string password);
-    void setUserName(string);
-    void setMsgList(List<MailMessage>);
-    void setPassword(string);
-    int get_userID();
-    string getUserName();
-    string getPassword();
-    List<MailMessage>& get_mails();
+    User(string name, string pass, int _id) {_userName = name; _passWord = pass; userId = _id;}
+    User(const User&);            //
+    void setUser(string, string); //
+    void setUserName(string);     //
+    void setMsgList(List<MailMessage> *);//
+    void setPassword(string);     //
+    int const get_userID();       //
+    string const getUserName();   //
+    string const getPassword();   //
+    List<MailMessage>& get_mails();//
+    void deleteMarked();
     ~User();
 };
 bool operator==(const User& user1, const User& user2);
