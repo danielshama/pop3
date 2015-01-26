@@ -11,11 +11,18 @@
 MailMessage::MailMessage(int ID, string from, string to, string data, DateTime mailT)
 {
     _Id = ID;
-    _from.assign(from);
-    _to.assign(to);
-    _data.assign(data);
+    _from = from;
+    _to = to;
+    _data= data;
+    _mailTime = mailT;
 }
-
+MailMessage::MailMessage(const MailMessage& o){
+    _Id = o._Id;
+    _from = o._from;
+    _to = o._to;
+    _data = o._data;
+    _mailTime = o._mailTime;
+}
 const string& MailMessage::getMsg()
 {
     return _data;

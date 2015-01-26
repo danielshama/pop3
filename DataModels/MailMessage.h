@@ -21,6 +21,8 @@ private:
     DateTime _mailTime;
 public:
     MailMessage(int ID,string from,string to,string data, DateTime mailT);
+    MailMessage(const MailMessage&);
+    
     const string& getMsg();
     const string& fromWho();
 };

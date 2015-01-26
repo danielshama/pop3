@@ -37,7 +37,7 @@ public:
 
 
 template <class T>
-List<T>::List(): p(NULL), head(p)
+List<T>::List(): p(NULL), head(NULL)
 {
     
 }
@@ -53,7 +53,7 @@ void List<T>::prinall()
     Node<T> *t = head;
     int count=0;
     
-    while(t->next != NULL){
+    while(t != NULL){
         cout << count << ", ";
         t = t->next;
         count++;
@@ -84,15 +84,13 @@ void List<T>::insert(T newD)
         head=p;
         p->next = NULL;
         p->prev = NULL;
-        //cout << d << " inserted.\n";
     }
     else
     {
         p->next = new Node<T>(newD);
         p->next->prev = p;
-        head->prev = p->next;
-        p->next->next = NULL;
         p = p->next;
+        p->next = NULL;
     }
 }
 
@@ -103,7 +101,7 @@ T& List<T>::getObj(int objId)
     Node<T> *t = head;
     int count=0;
     
-    while(t->next != NULL){
+    while(t != NULL){
         if(count== objId)
             return t->getDataObj();
         t = t->next;
@@ -130,13 +128,19 @@ void List<T>::markForRemove(int objId){
 template <class T>
 void List<T>::remove()
 {
-    Node<T> *t =head;
+    Node<T> *t =head, *s=t;
     while(t!=NULL){
         if(t->ifForRemove()){
-            if(t==head) head = t->next;
-            t->next->prev = t->prev;
-            t->prev->next = t->next;
-            t->~Node();
+            if(t==head){
+                head = t->next;
+                t->~Node();
+                s = t = head;
+            }else{
+                s->next = t->next;
+                t->~Node();
+                t=s->next;
+                t=t->next;
+            }
         }
         t=t->next;
     }

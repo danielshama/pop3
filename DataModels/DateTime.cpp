@@ -44,4 +44,14 @@ DateTime::~DateTime(){
     
 }
 
+DateTime& DateTime::operator=(const DateTime& o){
+    day = o.day;
+    month = o.month;
+    year = o.year;
+    hour = o.hour;
+    minute = o.minute;
+    second = o.second;
+    return *this;
+}
+
 
