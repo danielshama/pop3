@@ -13,11 +13,12 @@ MailInterface::MailInterface(User* tuser):_pop3(tuser),steps(0),login(false){
 }
 void MailInterface::runInterFace(){
     int ans=0;
-    for (;;steps++){
+    for (;;){
         
         if(steps==0){
             ans=printMenu(1);
-            makeAstep(ans);
+            if(ans==1)makeAstep(ans);
+            else Quit();
             steps++;
         }else{
             if(login == true){
@@ -32,7 +33,7 @@ void MailInterface::makeAstep(int act){
     switch (act) {
         case 1:{
             if(login == true){
-                cout << "you allredy in" << endl;
+                cout << "you allredy in.\n" << endl;
                 break;
             }
             bool ans = false;
@@ -40,21 +41,30 @@ void MailInterface::makeAstep(int act){
             string password;
             string tryAgin="";
             while(ans == false){
-                cout << "Log in - " << endl << "Username: " << endl;
+                cout << "\nLog in - " << endl << " Username: ";
                 cin >> userName;
-                cout << "Password: " << endl;
+                cout << " Password: ";
                 cin >> password;
                 const string x = userName;
                 const string y = password;
                 ans = Authenticate(x, y);
                 if(ans == false){
-                    while(tryAgin != "y" && tryAgin != "Y"){
-                        cout << "Try again? y/n" << endl;
+                    cout << "Try again? y/n" << endl;
+                    while(tryAgin==""){
                         cin >> tryAgin;
-                        if(tryAgin == "n" || tryAgin == "N") break;
                     }
-                    break;
-                }else login =true;
+                    if(tryAgin == "y" || tryAgin == "Y"){
+                        makeAstep(1);
+                    }else break;
+                }else{
+                    if(userName.find("@")!=string::npos){
+                        int loc =(int)userName.find("@");
+                        userName.erase(loc);
+                    }
+                    cout << "\n\n Hello " << userName << "," << endl;
+                   login =true;
+                    
+                }
             }
             break;
         }
@@ -88,26 +98,30 @@ void MailInterface::makeAstep(int act){
     }
 }
 int MailInterface::printMenu(int opt){
-    int answer;
+    int answer=0;
     while (opt != 0){
         switch (opt) {
             case 1:
-                cout<< "Welcome to My Outlook ( Only Get mails ) : " << endl
+                cout<< "\n\nWelcome to My Outlook ( Only Get mails ) : " << endl
                 <<"1.	Authenticate. ( User + Password  Commands)" <<endl
-                <<"2.	Quit ( Quit Command + Exit the Program )."<<endl;
-                
-                cin >> answer;
+                <<"2.	Quit ( Quit Command + Exit the Program )."<<endl
+                <<"\nYour choise: ";
+                while(answer==0){
+                    cin >> answer;
+                }
                 if ( answer ==1 || answer ==2) return answer;
                 break;
             default:
-                cout<< "Welcome to My Outlook ( Only Get mails ) : " << endl
+               // cout << "Hello " <<
+                cout<< "\n\nWelcome to My Outlook ( Only Get mails ) : " << endl
                 <<" 1.	Authenticate. ( User + Password  Commands)"<< endl
                 <<" 2.	Get Mail Status ( Stat Command )."<< endl
                 <<" 3.	Get Mails List ( List Command )."<< endl
                 <<" 4.	Get One Mail (Retr Command )."<< endl
                 <<" 5.	Delete mail ( Dele Command)."<< endl
                 <<" 6.	RSET ( RSET Command)."<< endl
-                <<" 7.	Quit ( Quit Command + Exit the Program )."<< endl;
+                <<" 7.	Quit ( Quit Command + Exit the Program )."<< endl
+                <<"\nYour choise: ";
                 
                 cin >> answer;
                 if ( answer >=1 || answer <=7) return answer;

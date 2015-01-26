@@ -22,6 +22,7 @@ private:
 public:
     MailMessage(int ID,string from,string to,string data, DateTime mailT);
     const string& getMsg();
+    const string& fromWho();
 };
 
 #endif /* defined(__pop3__MailMessage__) */

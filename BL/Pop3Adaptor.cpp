@@ -11,11 +11,16 @@
 
 const char* Pop3Adaptor::User(const string userId)
 {
-    /*if (_user->getUserName().substr(strlen(userId),1) != "@")
-    {
-        _result.assign("-OK");
-        return _result.c_str();
-    }*/
+    _result.assign(userId);
+    if(userId.find("@") == string::npos){
+        string usert = _user->getUserName();
+        int loc =(int)usert.find("@");
+        usert.erase(loc);
+        if(usert.compare(_result) == 0){
+            _result.assign("+OK");
+            return _result.c_str();
+        }
+    }
     _result.assign(userId);
     if (_user->getUserName().compare(_result) == 0)
     {
@@ -45,41 +50,39 @@ const char* Pop3Adaptor::STAT ()
 //        return _result.c_str();
 //    }
     _result.assign("+OK ");
-    ostringstream convert;
-    convert << _user->get_mails().getAmount();
-    _result += convert.str();
+    //ostringstream convert;
+   // convert << _user->get_mails().getAmount();
+    _result += to_string(_user->get_mails().getAmount());
     _result += " ";
-    convert.clear();
+    //convert.clear();
     long long int _size = 0;
     for (int i = 1; i <= _user->get_mails().getAmount(); ++i)
     {
         _size = sizeof(_user->get_mails().getObj(i));
     }
-    convert << _size;
-    _result += convert.str();
+    //convert << _size;
+    _result += to_string(_size);
     return _result.c_str();
 }
 
 const char* Pop3Adaptor::LIST()
 {
-    ostringstream convert;
+    //ostringstream convert;
     _result.assign("+OK ");
-    convert << _user->get_mails().getAmount();
-    _result += convert.str();
-    _result += " messages\n";
+    //convert << _user->get_mails().getAmount();
+    _result += to_string(_user->get_mails().getAmount());
+    _result += " messages \n";
     if (_user->get_mails().empty())
         return _result.c_str();
     for (int i = 1; i <= _user->get_mails().getAmount(); ++i)
     {
-        convert.clear();
-        convert << i;
-        _result += convert.str();
+        //convert.clear();
+        //convert << i;
+        _result += to_string(i);
         _result += " ";
-        convert.clear();
-        long long _size = sizeof(_user->get_mails().getObj(i));
-        convert << _size;
-        _result += convert.str();
-        _result += "\n";
+        //convert.clear();
+        _result += to_string(sizeof(_user->get_mails().getObj(i)));
+        _result += " \n";
     }
     return _result.c_str();
 }
@@ -131,14 +134,16 @@ const char* Pop3Adaptor::QUIT()
 
 const char* Pop3Adaptor::displaySum()
 {
-    ostringstream convert;
+    //ostringstream convert;
+    _result.assign("");
     for (int i = 1; i <= _user->get_mails().getAmount(); ++i)
          {
-             convert << i;
-             _result += convert.str();
-             _result += "  (";
+             //convert << i;
+             _result += to_string(i);
+             _result += ") from: " + _user->get_mails().getObj(i).fromWho();
+             _result += "  text: ";
              _result += _user->get_mails().getObj(i).getMsg().substr(0,5);
-             _result += "...)\n";
+             _result += "... \n";
          }
     return _result.c_str();
 }

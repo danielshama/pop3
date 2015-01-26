@@ -21,4 +21,7 @@ const string& MailMessage::getMsg()
     return _data;
 }
 
+const string& MailMessage::fromWho(){
+    return _from;
+}
 

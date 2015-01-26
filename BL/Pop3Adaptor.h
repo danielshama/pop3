@@ -14,7 +14,7 @@
 #include "MailMessage.h"
 #include "User.h"
 #include <sstream>
-
+#include <fstream>
 // This class responsible to fetch and management your mailbox.
 // this implemenation will the mail box stoarge will base on a file systems.
 // it needs to take all the info from the "user list" and "mail list"
