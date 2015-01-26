@@ -30,12 +30,37 @@ public:
     void markForRemove(int);
     T& getObj(int);             //returns the data of the node
     void remove();              //remove items that marked
+    ~List();
+    void prinall();
 };
+
+
 
 template <class T>
 List<T>::List(): p(NULL), head(p)
 {
+    
 }
+template <class T>
+List<T>::~List()
+{
+    cout << "!!!!! " << endl;
+}
+
+template <class T>
+void List<T>::prinall()
+{
+    Node<T> *t = head;
+    int count=0;
+    
+    while(t->next != NULL){
+        cout << count << ", ";
+        t = t->next;
+        count++;
+    }
+    cout << endl;
+}
+
 
 template <class T>
 bool List<T>::empty()
@@ -57,8 +82,8 @@ void List<T>::insert(T newD)
     {
         p = new Node<T>(newD);
         head=p;
-        p->next = p;
-        p->prev = p;
+        p->next = NULL;
+        p->prev = NULL;
         //cout << d << " inserted.\n";
     }
     else
@@ -78,7 +103,7 @@ T& List<T>::getObj(int objId)
     Node<T> *t = head;
     int count=0;
     
-    while(t != NULL){
+    while(t->next != NULL){
         if(count== objId)
             return t->getDataObj();
         t = t->next;

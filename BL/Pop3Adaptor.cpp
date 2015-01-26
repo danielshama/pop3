@@ -44,6 +44,7 @@ const char* Pop3Adaptor::PASS (const string password)
 
 const char* Pop3Adaptor::STAT ()
 {
+    _user->get_mails()->prinall();
     int mailBoxSize =_user->get_mails()->getAmount();
     _result.assign("+OK ");
     _result += to_string(mailBoxSize);
