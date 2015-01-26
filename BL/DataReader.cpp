@@ -26,20 +26,20 @@ void DataReader::readFromData(){
     
     if(myData.is_open()){
         List<MailMessage> tmpMsgsList;
-        while (myData.getline(tmpStr, 120)) {
+        while (myData.getline(tmpStr, 250)) {
             len = (int)strlen(tmpStr);
-            if(tmpStr[0] != '#' || len > 1){
+            if(tmpStr[0] != '#' && len > 1){
                 if(ifTakeUser==false){
-                    _userName = strtok(tmpStr,", \n");
-                    _password = strtok(NULL,", \n");
+                    _userName = strtok(tmpStr,", \n\r");
+                    _password = strtok(NULL,", \n\r");
                     _user.setUserName(_userName);
                     _user.setPassword(_password);
                     ifTakeUser=true;
                 }else {
-                    msgID= atoi(strtok(tmpStr,", \n"));
-                    from = strtok(NULL,", \n");
-                    to = strtok(NULL,", \n");;
-                    receivedDate = strtok(NULL,", \n");
+                    msgID= atoi(strtok(tmpStr,", \n\r"));
+                    from = strtok(NULL,", \n\r");
+                    to = strtok(NULL,", \n\r");;
+                    receivedDate = strtok(NULL,", \n\r");
                     msgContent = strtok(NULL,"\r\n");
                     
                     DateTime tmpDate = calculDateTime(receivedDate);
@@ -47,8 +47,8 @@ void DataReader::readFromData(){
                     tmpMsgsList.insert(mailMsg);
                 }
             }
-        myData.close();
         }
+        myData.close();
         _user.setMsgList(&tmpMsgsList);
     }
     

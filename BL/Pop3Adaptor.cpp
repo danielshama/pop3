@@ -28,7 +28,7 @@ const char* Pop3Adaptor::User(const string userId)
 const char* Pop3Adaptor::PASS (const string password)
 {
     _result.assign(password);
-    if (_user->getPassword().compare(_result))
+    if (_user->getPassword().compare(_result)==0)
     {
         _result.assign("+OK");
         return _result.c_str();
@@ -39,11 +39,11 @@ const char* Pop3Adaptor::PASS (const string password)
 
 const char* Pop3Adaptor::STAT ()
 {
-    if (_user->get_mails().empty())
-    {
-        _result.assign("-OK");
-        return _result.c_str();
-    }
+//    if (_user->get_mails().empty())
+//    {
+//        _result.assign("-OK");
+//        return _result.c_str();
+//    }
     _result.assign("+OK ");
     ostringstream convert;
     convert << _user->get_mails().getAmount();
