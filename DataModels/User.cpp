@@ -27,9 +27,9 @@ string const User::getPassword()
     return _passWord;
 }
 
-List<MailMessage>& User::get_mails()
+List<MailMessage>* User::get_mails()
 {
-    return *msgsList;
+    return msgsList;
 }
 
 void User::setUserName(string name)

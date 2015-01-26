@@ -77,5 +77,5 @@ User* DataReader::getUser(){
 }
 
 List<MailMessage>* DataReader::getMailBox(int userId){
-    return &( _user.get_mails() );
+    return ( _user.get_mails() );
 }

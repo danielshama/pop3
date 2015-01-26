@@ -29,7 +29,7 @@ public:
     void setPassword(string);     //
     string const getUserName();   //
     string const getPassword();   //
-    List<MailMessage>& get_mails();//
+    List<MailMessage>* get_mails();//
     ~User();
 };
 #endif /* defined(__pop3__User__) */

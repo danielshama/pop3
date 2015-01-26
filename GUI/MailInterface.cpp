@@ -114,17 +114,16 @@ int MailInterface::printMenu(int opt){
             default:
                // cout << "Hello " <<
                 cout<< "\n\nWelcome to My Outlook ( Only Get mails ) : " << endl
-                <<" 1.	Authenticate. ( User + Password  Commands)"<< endl
-                <<" 2.	Get Mail Status ( Stat Command )."<< endl
-                <<" 3.	Get Mails List ( List Command )."<< endl
-                <<" 4.	Get One Mail (Retr Command )."<< endl
-                <<" 5.	Delete mail ( Dele Command)."<< endl
-                <<" 6.	RSET ( RSET Command)."<< endl
-                <<" 7.	Quit ( Quit Command + Exit the Program )."<< endl
+                <<" 1.	Get Mail Status ( Stat Command )."<< endl
+                <<" 2.	Get Mails List ( List Command )."<< endl
+                <<" 3.	Get One Mail (Retr Command )."<< endl
+                <<" 4.	Delete mail ( Dele Command)."<< endl
+                <<" 5.	RSET ( RSET Command)."<< endl
+                <<" 6.	Quit ( Quit Command + Exit the Program )."<< endl
                 <<"\nYour choise: ";
                 
                 cin >> answer;
-                if ( answer >=1 || answer <=7) return answer;
+                if ( answer >=1 || answer <=6) return answer+1;
                 break;
         }
     
