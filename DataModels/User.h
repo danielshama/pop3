@@ -18,17 +18,15 @@ class User
 {
 private:
     string _userName, _passWord;//not able to work with const
-    int userId;
     List<MailMessage> *msgsList;
 public:
     User();
-    User(string name, string pass, int _id) {_userName = name; _passWord = pass; userId = _id;}
+    User(string name, string pass) {_userName = name; _passWord = pass;}
     User(const User&);            //
     void setUser(string, string); //
     void setUserName(string);     //
     void setMsgList(List<MailMessage> *);//
     void setPassword(string);     //
-    int const get_userID();       //
     string const getUserName();   //
     string const getPassword();   //
     List<MailMessage>& get_mails();//

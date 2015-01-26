@@ -36,14 +36,14 @@ public:
      Supply your e-mail userid (this may or may not not the full e-mail address).
      Example: USER john.smith
      */
-    const char* User(const char* userId);
+    const char* User(const string userId);
     
     /* PASS password
      This must be the next command after USER.
      Supply your e-mail password.
      The password may be case sensitive.
      */
-    const char* PASS (const char* password);
+    const char* PASS (const string password);
     
     /* STAT SPEC
      STAT The response to this is: +OK #msgs #bytes Where #msgs is the number of messages

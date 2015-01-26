@@ -10,8 +10,7 @@
 #include <fstream>
 
 
-DataReader::DataReader(const string dataFile): dataAddres(dataFile){
-    readFromData();
+DataReader::DataReader(const char* dataFile): dataAddres(dataFile){
 }
 
 void DataReader::readFromData(){
@@ -33,6 +32,8 @@ void DataReader::readFromData(){
                 if(ifTakeUser==false){
                     _userName = strtok(tmpStr,", \n");
                     _password = strtok(NULL,", \n");
+                    _user.setUserName(_userName);
+                    _user.setPassword(_password);
                     ifTakeUser=true;
                 }else {
                     msgID= atoi(strtok(tmpStr,", \n"));
@@ -71,8 +72,8 @@ DateTime DataReader::calculDateTime(string time){
     
 }
 
-User& DataReader::getUser(){
-    return _user;
+User* DataReader::getUser(){
+    return &_user;
 }
 
 List<MailMessage>* DataReader::getMailBox(int userId){

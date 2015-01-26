@@ -27,11 +27,11 @@ private:
     void makeAstep(int);
 public:
     //MailInterface();
-    MailInterface(User);
+    MailInterface(User*);
     
     void runInterFace(); // beginning the interface structer - print choices
     
-    bool Authenticate(const char* userName, const char* passWord); // Authenticates the user name and password from the txt file
+    bool Authenticate(const string userName, const string passWord); // Authenticates the user name and password from the txt file
     
     void GetMailStatus(); // +ok, mail amount, total byte amount
     

@@ -17,11 +17,6 @@ User::User(const User& other)//what to do with the id
     _passWord.assign(other._passWord);
 }
 
-int const User::get_userID()
-{
-    return userId;
-}
-
 string const User::getUserName()
 {
     return _userName;

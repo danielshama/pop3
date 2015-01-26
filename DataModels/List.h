@@ -84,7 +84,7 @@ T& List<T>::getObj(int objId)
         t = t->next;
         count++;
     }
-    return NULL;
+    return head->getDataObj();
 }
 
 template <class T>

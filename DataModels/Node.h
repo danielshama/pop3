@@ -15,19 +15,20 @@ template <class T>
 class Node
 {
 private:
+protected:
+    
+public:
     bool forRemove;
     Node * next;            //pointer to the next node
     Node * prev;            //pointer to the prev node
     T data;                 //placeholder for generic data
     static int count;
-public:    
     Node(T d);          //constructor
     int getAmount() const;
     T& getDataObj();
     bool ifForRemove();
     void markForRemove();
     void clearMarks();
-    ~Node();
 };
 
 template <class T>

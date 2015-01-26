@@ -9,7 +9,7 @@
 #include "MailInterface.h"
 
 
-MailInterface::MailInterface(User tuser):_pop3(&tuser),steps(0),login(false){
+MailInterface::MailInterface(User* tuser):_pop3(tuser),steps(0),login(false){
 }
 void MailInterface::runInterFace(){
     int ans=0;
@@ -36,16 +36,16 @@ void MailInterface::makeAstep(int act){
                 break;
             }
             bool ans = false;
-            char* userName;
-            char* password;
+            string userName;
+            string password;
             string tryAgin="";
             while(ans == false){
-                cout << "Login : " << endl << "Username: " << endl;
+                cout << "Log in - " << endl << "Username: " << endl;
                 cin >> userName;
                 cout << "Password: " << endl;
                 cin >> password;
-                const char* x = userName;
-                const char* y = password;
+                const string x = userName;
+                const string y = password;
                 ans = Authenticate(x, y);
                 if(ans == false){
                     while(tryAgin != "y" && tryAgin != "Y"){
@@ -53,6 +53,7 @@ void MailInterface::makeAstep(int act){
                         cin >> tryAgin;
                         if(tryAgin == "n" || tryAgin == "N") break;
                     }
+                    break;
                 }else login =true;
             }
             break;
@@ -116,7 +117,7 @@ int MailInterface::printMenu(int opt){
     }
     return 1;
 }
-bool MailInterface::Authenticate(const char* userName, const char* passWord){
+bool MailInterface::Authenticate(const string userName, const string passWord){
     string user =_pop3.User(userName);
     string pass=_pop3.PASS(passWord);
     

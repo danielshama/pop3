@@ -9,13 +9,13 @@
 #include "Pop3Adaptor.h"
 
 
-const char* Pop3Adaptor::User(const char* userId)
+const char* Pop3Adaptor::User(const string userId)
 {
-    if (_user->getUserName().substr(strlen(userId),1) != "@")
+    /*if (_user->getUserName().substr(strlen(userId),1) != "@")
     {
         _result.assign("-OK");
         return _result.c_str();
-    }
+    }*/
     _result.assign(userId);
     if (_user->getUserName().compare(_result) == 0)
     {
@@ -25,7 +25,7 @@ const char* Pop3Adaptor::User(const char* userId)
     _result.assign("-OK");
     return _result.c_str();
 }
-const char* Pop3Adaptor::PASS (const char* password)
+const char* Pop3Adaptor::PASS (const string password)
 {
     _result.assign(password);
     if (_user->getPassword().compare(_result))

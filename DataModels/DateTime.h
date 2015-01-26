@@ -33,9 +33,9 @@ public:
     void setMinute(int m){minute=m;}
     void setSecond(int s){second=s;}
     void setTime(int, int, int, int , int, int);
-    ~DateTime();
     
     DateTime(int, int, int, int, int, int);
+    ~DateTime();
 };
 
 

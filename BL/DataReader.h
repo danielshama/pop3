@@ -20,11 +20,11 @@ private:
     //List<MailMessage> *Msgs;
     User _user;
     
-    void readFromData();
     DateTime calculDateTime(string);
 public:
-    DataReader(const string); //update
-    User& getUser();
+    void readFromData();
+    DataReader(const char*); //update
+    User* getUser();
     List<MailMessage> *getMailBox(int);
 };
 

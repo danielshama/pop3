@@ -22,6 +22,14 @@ DateTime::DateTime(int yr, int mn, int dy, int hr, int mt, int sc)
     minute = mt;
     second = sc;
 }
+DateTime::DateTime(const DateTime& other){
+    year = other.year;
+    month = other.month;
+    day = other.day;
+    hour = other.hour;
+    minute = other.minute;
+    second = other.second;
+}
 
 void DateTime::setTime(int _day, int _month, int _year, int _hour, int _min, int _sec)
 {
@@ -31,6 +39,9 @@ void DateTime::setTime(int _day, int _month, int _year, int _hour, int _min, int
     hour = _hour;
     minute = _min;
     second = _sec;
+}
+DateTime::~DateTime(){
+    
 }
 
 
