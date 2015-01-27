@@ -25,7 +25,7 @@ void DataReader::readFromData(){
     
     
     if(myData.is_open()){
-        List<MailMessage> tmpMsgsList;
+        List<MailMessage> *tmpMsgsList = new List<MailMessage>;
         while (myData.getline(tmpStr, 250)) {
             len = (int)strlen(tmpStr);
             if(tmpStr[0] != '#' && len > 1){
@@ -44,12 +44,12 @@ void DataReader::readFromData(){
                     
                     DateTime tmpDate = calculDateTime(receivedDate);
                     MailMessage mailMsg(msgID,from,to,msgContent,tmpDate);
-                    tmpMsgsList.insert(mailMsg);
+                    tmpMsgsList->insert(mailMsg);
                 }
             }
         }
         myData.close();
-        _user.setMsgList(&tmpMsgsList);
+        _user.setMsgList(tmpMsgsList);
     }
     
     

@@ -48,7 +48,7 @@ void User::setUser(string name, string pass)
     _passWord.assign(pass);
 }
 
-void User::setMsgList(List<MailMessage> *list)
+void User::setMsgList(List<MailMessage>* list)
 {
     msgsList = list;
 }

@@ -8,7 +8,7 @@
 
 #include "MailMessage.h"
 
-MailMessage::MailMessage(int ID, string from, string to, string data, DateTime mailT)
+MailMessage::MailMessage(int ID, string from, string to, string data, DateTime& mailT)
 {
     _Id = ID;
     _from = from;

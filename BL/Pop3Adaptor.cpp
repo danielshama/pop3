@@ -44,7 +44,7 @@ const char* Pop3Adaptor::PASS (const string password)
 
 const char* Pop3Adaptor::STAT ()
 {
-    _user->get_mails()->prinall();
+    //_user->get_mails()->prinall();
     int mailBoxSize =_user->get_mails()->getAmount();
     _result.assign("+OK ");
     _result += to_string(mailBoxSize);
@@ -122,11 +122,14 @@ const char* Pop3Adaptor::QUIT()
 
 const char* Pop3Adaptor::displaySum()
 {
-    //ostringstream convert;
+    if (_user->get_mails()->empty())
+    {
+        _result.assign("empty");
+        return _result.c_str();
+    }
     _result.assign("");
     for (int i = 1; i <= _user->get_mails()->getAmount(); ++i)
          {
-             //convert << i;
              _result += to_string(i);
              _result += ") from: " + _user->get_mails()->getObj(i).fromWho();
              _result += "  text: ";

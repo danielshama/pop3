@@ -25,7 +25,7 @@ public:
     User(const User&);            //
     void setUser(string, string); //
     void setUserName(string);     //
-    void setMsgList(List<MailMessage> *);//
+    void setMsgList(List<MailMessage>*);//
     void setPassword(string);     //
     string const getUserName();   //
     string const getPassword();   //

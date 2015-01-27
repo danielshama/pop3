@@ -25,7 +25,7 @@ public:
     List();               //constructor
     bool empty();               //returns true if the list is empty, false otherwise
     int getAmount();                 //returns the number of elements in the list
-    void insert(T d); //inserts a node before the current node
+    void insert(T& d); //inserts a node before the current node
     void clearMarks(int);
     void markForRemove(int);
     T& getObj(int);             //returns the data of the node
@@ -76,11 +76,15 @@ int List<T>::getAmount()
 }
 
 template <class T>
-void List<T>::insert(T newD)
+void List<T>::insert(T& newD)
 {
     if (p == NULL)
     {
         p = new Node<T>(newD);
+        if(p == NULL) {
+            cout << " eror new node fs" << endl;
+            return;
+        }
         head=p;
         p->next = NULL;
         p->prev = NULL;
@@ -88,9 +92,11 @@ void List<T>::insert(T newD)
     else
     {
         p->next = new Node<T>(newD);
-        p->next->prev = p;
-        p = p->next;
-        p->next = NULL;
+        if(p->next != NULL){
+            p->next->prev = p;
+            p = p->next;
+            p->next = NULL;
+        }else cout << " eror new node"<< endl;
     }
 }
 

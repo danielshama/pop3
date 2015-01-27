@@ -29,6 +29,7 @@ public:
     bool ifForRemove();
     void markForRemove();
     void clearMarks();
+    ~Node();
 };
 
 template <class T>
@@ -61,5 +62,11 @@ void Node<T>::markForRemove(){
 template <class T>
 void Node<T>::clearMarks(){
     forRemove=false;
+}
+
+template <class T>
+Node<T>::~Node()
+{
+    count--;
 }
 #endif /* defined(__pop3__Node__) */
