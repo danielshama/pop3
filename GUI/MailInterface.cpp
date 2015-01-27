@@ -103,8 +103,8 @@ int MailInterface::printMenu(int opt){
         switch (opt) {
             case 1:
                 cout<< "\n\nWelcome to My Outlook ( Only Get mails ) : " << endl
-                <<"1.	Authenticate. ( User + Password  Commands)" <<endl
-                <<"2.	Quit ( Quit Command + Exit the Program )."<<endl
+                <<"1.	Authenticate." <<endl
+                <<"2.	Quit ( Exit the Program )."<<endl
                 <<"\nYour choise: ";
                 while(answer==0){
                     cin >> answer;
@@ -114,12 +114,12 @@ int MailInterface::printMenu(int opt){
             default:
                // cout << "Hello " <<
                 cout<< "\n\nWelcome to My Outlook ( Only Get mails ) : " << endl
-                <<" 1.	Get Mail Status ( Stat Command )."<< endl
-                <<" 2.	Get Mails List ( List Command )."<< endl
-                <<" 3.	Get One Mail (Retr Command )."<< endl
-                <<" 4.	Delete mail ( Dele Command)."<< endl
-                <<" 5.	RSET ( RSET Command)."<< endl
-                <<" 6.	Quit ( Quit Command + Exit the Program )."<< endl
+                <<" 1.	Get Mailbox Status."<< endl
+                <<" 2.	Print Mails List."<< endl
+                <<" 3.	Print One Mail."<< endl
+                <<" 4.	Delete one mail."<< endl
+                <<" 5.	Reset."<< endl
+                <<" 6.	Quit ( Exit the Program )."<< endl
                 <<"\nYour choise: ";
                 
                 cin >> answer;
