@@ -17,13 +17,14 @@
 class DataReader{
 private:
     const string dataAddres;
-    //List<MailMessage> *Msgs;
     User _user;
     
     DateTime calculDateTime(string);
 public:
     void readFromData();
     DataReader(const char*); //update
+    DataReader(const DataReader&);
+    void upDateData();
     User* getUser();
     List<MailMessage> *getMailBox(int);
 };

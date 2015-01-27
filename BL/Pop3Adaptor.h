@@ -15,6 +15,7 @@
 #include "User.h"
 #include <sstream>
 #include <fstream>
+#include "DataReader.h"
 // This class responsible to fetch and management your mailbox.
 // this implemenation will the mail box stoarge will base on a file systems.
 // it needs to take all the info from the "user list" and "mail list"
@@ -25,12 +26,14 @@ class Pop3Adaptor
 {
 private:
 //    int userNum; //the user's number in tje user's container
-//    List<User> *userList;
+    DataReader *_dataRe;
     User *_user;
     string _result;
+    
 public:
     /* pop3Adaptor constractor. need the address of the data file*/
-    Pop3Adaptor(User *user) {_user = user;}
+    Pop3Adaptor(DataReader* _dr_):_user(_dr_->getUser()),_dataRe(_dr_),_result(""){}
+    
     /* USER userid
      This must be the first command after the connect.
      Supply your e-mail userid (this may or may not not the full e-mail address).

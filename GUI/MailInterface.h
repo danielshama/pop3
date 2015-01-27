@@ -15,19 +15,20 @@
 #include "Pop3Adaptor.h"
 #include "List.h"
 #include <fstream>
+#include "DataReader.h"
 
 class MailInterface
 {
 private:
     Pop3Adaptor _pop3;
+    DataReader _dataReader;
     int steps;
     bool login;
-    
     int printMenu(int);
     void makeAstep(int);
 public:
     //MailInterface();
-    MailInterface(User*);
+    MailInterface(DataReader*);
     
     void runInterFace(); // beginning the interface structer - print choices
     

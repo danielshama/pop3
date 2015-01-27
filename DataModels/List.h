@@ -27,6 +27,7 @@ public:
     int getAmount();                 //returns the number of elements in the list
     void insert(T& d); //inserts a node before the current node
     void clearMarks(int);
+    bool ifForDel(int);
     void markForRemove(int);
     T& getObj(int);             //returns the data of the node
     void remove();              //remove items that marked
@@ -119,7 +120,7 @@ T& List<T>::getObj(int objId)
 template <class T>
 void List<T>::markForRemove(int objId){
     Node<T> *t = head;
-    int count=0;
+    int count=1;
     
     while(t != NULL){
         if(count== objId){
@@ -132,20 +133,42 @@ void List<T>::markForRemove(int objId){
 }
 
 template <class T>
+bool List<T>::ifForDel(int objId){
+    Node<T> *t = head;
+    int count=1;
+    
+    while(t != NULL){
+        if(count== objId){
+            return t->ifForRemove();
+        }
+        t = t->next;
+        count++;
+    }
+    return false;
+}
+
+template <class T>
 void List<T>::remove()
 {
-    Node<T> *t =head, *s=t;
+    Node<T> *t =head, *s;
     while(t!=NULL){
         if(t->ifForRemove()){
             if(t==head){
                 head = t->next;
-                t->~Node();
-                s = t = head;
+                t->next->prev = NULL;
+                delete t;
+                t = head;
+            }else if(t->next != NULL){
+                t->prev->next = t->next;
+                t->next->prev = t->prev;
+                s = t->next;
+                delete t;
+                t=s;
             }else{
-                s->next = t->next;
-                t->~Node();
-                t=s->next;
-                t=t->next;
+                t->prev->next = NULL;
+                s = t->prev;
+                delete t;
+                t=s;
             }
         }
         t=t->next;
@@ -155,7 +178,7 @@ void List<T>::remove()
 template <class T>
 void List<T>::clearMarks(int objId){
     Node<T> *t = head;
-    int count=0;
+    int count=1;
     while(t != NULL){
         if(count == objId){
             t->clearMarks();

@@ -9,7 +9,7 @@
 #include "MailInterface.h"
 
 
-MailInterface::MailInterface(User* tuser):_pop3(tuser),steps(0),login(false){
+MailInterface::MailInterface(DataReader* _dr):_pop3(_dr),_dataReader(*_dr),steps(0),login(false){
 }
 void MailInterface::runInterFace(){
     int ans=0;
@@ -167,7 +167,7 @@ void MailInterface::GetOneMail(){
     while(ok != "0"){
         tmp = _pop3.displaySum();
         cout<< tmp << endl;
-        cout << "Choose message number:" << endl;
+        cout << "Choose message number:";
         cin >> msgNum;
         tmp =_pop3.RETR(msgNum);
         if(tmp[0] == '-') {

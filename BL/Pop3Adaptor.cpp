@@ -77,18 +77,24 @@ const char* Pop3Adaptor::LIST()
 
 const char* Pop3Adaptor::RETR(int msgNumber)
 {
-    if (msgNumber > _user->get_mails()->getAmount())
+    int x=_user->get_mails()->getAmount();
+    if (msgNumber > x)
     {
         _result.assign("-OK");
         return _result.c_str();
     }
-    _result.assign(_user->get_mails()->getObj(msgNumber).getMsg());
+    _result.assign("\n\nFrom: ");
+    _result += _user->get_mails()->getObj(msgNumber).fromWho();
+    _result += "\nText: \n  ";
+    _result += _user->get_mails()->getObj(msgNumber).getMsg();
+    _result += "\n";
     return _result.c_str();
 }
 
 const char* Pop3Adaptor::DELE(int msgNumber)
 {
-    if (_user->get_mails()->getAmount() < msgNumber)
+    int x=_user->get_mails()->getAmount() ;
+    if (x< msgNumber || msgNumber <=0)
     {
         _result.assign("-OK");
         return _result.c_str();
@@ -100,12 +106,13 @@ const char* Pop3Adaptor::DELE(int msgNumber)
 
 const char* Pop3Adaptor::RSET()
 {
+    int n =_user->get_mails()->getAmount();
     if (_user->get_mails()->empty())
     {
         _result.assign("+OK");
         return _result.c_str();
     }
-    for (int i = 1; i <= _user->get_mails()->getAmount(); ++i)
+    for (int i = 1; i <= n; ++i)
     {
         _user->get_mails()->clearMarks(i);
     }
@@ -115,6 +122,7 @@ const char* Pop3Adaptor::RSET()
 
 const char* Pop3Adaptor::QUIT()
 {
+    _dataRe->upDateData();
     _user->get_mails()->remove();
     _result.assign("+OK");
     return _result.c_str();
@@ -128,13 +136,18 @@ const char* Pop3Adaptor::displaySum()
         return _result.c_str();
     }
     _result.assign("");
-    for (int i = 1; i <= _user->get_mails()->getAmount(); ++i)
+    int n=_user->get_mails()->getAmount();
+    for (int i = 1; i <=n ; ++i)
          {
              _result += to_string(i);
              _result += ") from: " + _user->get_mails()->getObj(i).fromWho();
              _result += "  text: ";
              _result += _user->get_mails()->getObj(i).getMsg().substr(0,5);
-             _result += "... \n";
+             _result += "... ";
+             if(_user->get_mails()->ifForDel(i)){
+                 _result += "(Marked for delete).";
+             }
+             _result += "\n";
          }
     return _result.c_str();
 }

@@ -13,7 +13,7 @@ int main(int argc, const char * argv[]) {
     string s="Example.txt";
     DataReader _dataReader(s.c_str());
     _dataReader.readFromData();
-    MailInterface _mailInterFace(_dataReader.getUser());
+    MailInterface _mailInterFace(&_dataReader);
     _mailInterFace.runInterFace();
     return 0;
 }
