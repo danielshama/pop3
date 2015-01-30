@@ -45,7 +45,7 @@ List<T>::List(): p(NULL), head(NULL)
 template <class T>
 List<T>::~List()
 {
-    cout << "!!!!! " << endl;
+    //cout << "!!!!! " << endl;
 }
 
 template <class T>

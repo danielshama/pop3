@@ -24,6 +24,7 @@ public:
     MailMessage(const MailMessage&);
     const string& getMsg();
     const string& fromWho();
+    const string getMsgTime();
     int getId();
 };
 

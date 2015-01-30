@@ -30,6 +30,9 @@ const string& MailMessage::getMsg()
 int MailMessage::getId(){
     return _Id;
 }
+const string MailMessage::getMsgTime(){
+    return _mailTime.get_time();
+}
 
 const string& MailMessage::fromWho(){
     return _from;

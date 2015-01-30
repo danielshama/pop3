@@ -13,8 +13,7 @@ MailInterface::MailInterface(DataReader* _dr):_pop3(_dr),_dataReader(*_dr),steps
 }
 void MailInterface::runInterFace(){
     int ans=0;
-    for (;;){
-        
+    for(;;){
         if(steps==0){
             ans=printMenu(1);
             if(ans==1)makeAstep(ans);
@@ -24,9 +23,11 @@ void MailInterface::runInterFace(){
             if(login == true){
                 ans=printMenu(2);
                 makeAstep(ans);
+            }else{
+                steps =0;
+                runInterFace();
             }
         }
-        
     }
 }
 void MailInterface::makeAstep(int act){
@@ -40,7 +41,7 @@ void MailInterface::makeAstep(int act){
             string userName;
             string password;
             string tryAgin="";
-            while(ans == false){
+            while(ans == false && login == false){
                 cout << "\nLog in - " << endl << " Username: ";
                 cin >> userName;
                 cout << " Password: ";
@@ -55,7 +56,9 @@ void MailInterface::makeAstep(int act){
                     }
                     if(tryAgin == "y" || tryAgin == "Y"){
                         makeAstep(1);
-                    }else break;
+                    }else {
+                        return;
+                    }
                 }else{
                     if(userName.find("@")!=string::npos){
                         int loc =(int)userName.find("@");
@@ -63,6 +66,7 @@ void MailInterface::makeAstep(int act){
                     }
                     cout << "\n\n Hello " << userName << "," << endl;
                    login =true;
+                    break;
                     
                 }
             }
@@ -98,36 +102,44 @@ void MailInterface::makeAstep(int act){
     }
 }
 int MailInterface::printMenu(int opt){
-    int answer=0;
-    while (opt != 0){
-        switch (opt) {
-            case 1:
-                cout<< "\n\nWelcome to My Outlook ( Only Get mails ) : " << endl
-                <<"1.	Authenticate." <<endl
-                <<"2.	Quit ( Exit the Program )."<<endl
-                <<"\nYour choise: ";
-                while(answer==0){
-                    cin >> answer;
-                }
-                if ( answer ==1 || answer ==2) return answer;
-                break;
-            default:
-               // cout << "Hello " <<
-                cout<< "\n\nWelcome to My Outlook ( Only Get mails ) : " << endl
-                <<" 1.	Get Mailbox Status."<< endl
-                <<" 2.	Print Mails List."<< endl
-                <<" 3.	Print One Mail."<< endl
-                <<" 4.	Delete one mail."<< endl
-                <<" 5.	Reset."<< endl
-                <<" 6.	Quit ( Exit the Program )."<< endl
-                <<"\nYour choise: ";
-                
-                cin >> answer;
-                if ( answer >=1 || answer <=6) return answer+1;
-                break;
-        }
+    string answer;
+    int t,len;
     
+    switch (opt) {
+        case 1:
+            cout<< "\n\nWelcome to My Outlook ( Only Get mails ) : " << endl
+            <<"1.	Authenticate." <<endl
+            <<"2.	Quit ( Exit the Program )."<<endl
+            <<"\nYour choise: ";
+            cin >> answer;
+            t = answer[0]-'0';
+            len = (int)strlen(answer.c_str());
+            if ( (t == 1 || t == 2) && len == 1) return t;
+            else{
+                printMenu(1);
+            }
+            break;
+        default:
+            //cout << "Hello " <<
+            cout<< "\n\nWelcome to My Outlook ( Only Get mails ) : " << endl
+            <<" 1.	Get Mailbox Status."<< endl
+            <<" 2.	Print Mails List."<< endl
+            <<" 3.	Print One Mail."<< endl
+            <<" 4.	Delete one mail."<< endl
+            <<" 5.	Reset."<< endl
+            <<" 6.	Quit ( Exit the Program )."<< endl
+            <<"\nYour choise: ";
+            
+            cin >> answer;
+            t = answer[0]-'0';
+            len = (int)strlen(answer.c_str());
+            if ( (t >=1 || t <=6) && len ==1) return t+1;
+            else{
+                printMenu(2);
+            }
+            break;
     }
+
     return 1;
 }
 bool MailInterface::Authenticate(const string userName, const string passWord){
@@ -141,8 +153,13 @@ bool MailInterface::Authenticate(const string userName, const string passWord){
 }
 
 void MailInterface::GetMailStatus(){
-    string tmp =_pop3.STAT();
-    cout << tmp << endl;
+    string tmp =_pop3.STAT(),tm;
+    int i =  (int)tmp.find(" ");
+    tm = tmp.substr(i+1);
+    int j = (int)tm.find(" ");
+     tmp = tm.substr(0,j);
+    string t = "There are " + tmp + " messages, on " + tm.substr(j+1) +" bytes.";
+    cout << t << endl;
 }
 
 void MailInterface::GetMailList(){
@@ -153,7 +170,10 @@ void MailInterface::GetMailList(){
         return;
     }
     string tmpe =_pop3.LIST();
-    cout << tmpe << endl;
+    string t = "there are " + tmpe.substr(4,10) + ", memory:\n";
+    t += tmpe.substr(16);
+    
+    cout << t << endl;
 }
 
 void MailInterface::GetOneMail(){
@@ -165,7 +185,8 @@ void MailInterface::GetOneMail(){
         return;
     }
     while(ok != "0"){
-        tmp = _pop3.displaySum();
+        tmp = "Choose:\n";
+        tmp += _pop3.displaySum();
         cout<< tmp << endl;
         cout << "Choose message number:";
         cin >> msgNum;
@@ -174,6 +195,7 @@ void MailInterface::GetOneMail(){
             cout << "Try again. \n" << endl;
             continue;
         }
+        tmp = tmp.substr(4);
         cout << tmp << endl;
         break;
     }
@@ -188,7 +210,8 @@ void MailInterface::DeleteMail(){
         return;
     }
     while(ok != "0"){
-        tmp = _pop3.displaySum();
+        tmp = "Choose:\n";
+        tmp += _pop3.displaySum();
         cout<< tmp << endl;
         cout << "Choose message number:" << endl;
         cin >> msgNum;

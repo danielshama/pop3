@@ -44,6 +44,11 @@ DateTime::~DateTime(){
     
 }
 
+const string DateTime::get_time(){
+    string t = to_string(day) + "/" + to_string(month) + "/" + to_string(year) + "  " + to_string(hour) + ":"+to_string(minute)+":"+to_string(second);
+    return t;
+}
+
 DateTime& DateTime::operator=(const DateTime& o){
     day = o.day;
     month = o.month;

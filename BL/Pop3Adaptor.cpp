@@ -83,8 +83,9 @@ const char* Pop3Adaptor::RETR(int msgNumber)
         _result.assign("-OK");
         return _result.c_str();
     }
-    _result.assign("\n\nFrom: ");
+    _result.assign("+OK \n\nFrom: ");
     _result += _user->get_mails()->getObj(msgNumber).fromWho();
+    _result += "       " + _user->get_mails()->getObj(msgNumber).getMsgTime();
     _result += "\nText: \n  ";
     _result += _user->get_mails()->getObj(msgNumber).getMsg();
     _result += "\n";
