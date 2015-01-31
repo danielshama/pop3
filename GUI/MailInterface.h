@@ -21,14 +21,14 @@ class MailInterface
 {
 private:
     Pop3Adaptor _pop3;
-    DataReader _dataReader;
+    //DataReader _dataReader;
     int steps;
     bool login;
     int printMenu(int);
     void makeAstep(int);
 public:
     //MailInterface();
-    MailInterface(DataReader*);
+    MailInterface(const char*);
     
     void runInterFace(); // beginning the interface structer - print choices
     

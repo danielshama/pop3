@@ -9,7 +9,7 @@
 #include "MailInterface.h"
 
 
-MailInterface::MailInterface(DataReader* _dr):_pop3(_dr),_dataReader(*_dr),steps(0),login(false){
+MailInterface::MailInterface(const char* s):_pop3(s),steps(0),login(false){
 }
 void MailInterface::runInterFace(){
     int ans=0;

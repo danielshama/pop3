@@ -26,13 +26,17 @@ class Pop3Adaptor
 {
 private:
 //    int userNum; //the user's number in tje user's container
-    DataReader *_dataRe;
+    DataReader _dataRe;
     User *_user;
     string _result;
     
 public:
     /* pop3Adaptor constractor. need the address of the data file*/
-    Pop3Adaptor(DataReader* _dr_):_user(_dr_->getUser()),_dataRe(_dr_),_result(""){}
+    Pop3Adaptor(const char* fileadd):_result(""),_dataRe(fileadd),_user(_dataRe.getUser()){
+        ;
+        _dataRe.readFromData();
+    
+    }
     
     /* USER userid
      This must be the first command after the connect.
