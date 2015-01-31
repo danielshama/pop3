@@ -13,7 +13,7 @@
 #include "Node.h"
 
 
-//a circular doubly-linked list
+//a circular double-linked list
 template <class T>
 class List
 {
@@ -32,7 +32,6 @@ public:
     T& getObj(int);             //returns the data of the node
     void remove();              //remove items that marked
     ~List();
-    void prinall();
 };
 
 
@@ -46,20 +45,6 @@ template <class T>
 List<T>::~List()
 {
     //cout << "!!!!! " << endl;
-}
-
-template <class T>
-void List<T>::prinall()
-{
-    Node<T> *t = head;
-    int count=0;
-    
-    while(t != NULL){
-        cout << count << ", ";
-        t = t->next;
-        count++;
-    }
-    cout << endl;
 }
 
 
@@ -106,7 +91,7 @@ template <class T>
 T& List<T>::getObj(int objId)
 {
     Node<T> *t = head;
-    int count=0;
+    int count=1;
     
     while(t != NULL){
         if(count== objId)
@@ -154,6 +139,12 @@ void List<T>::remove()
     while(t!=NULL){
         if(t->ifForRemove()){
             if(t==head){
+                if (t->next == NULL) {
+                    delete t;
+                    head = NULL;
+                    p = NULL;
+                    return;
+                }
                 head = t->next;
                 t->next->prev = NULL;
                 delete t;

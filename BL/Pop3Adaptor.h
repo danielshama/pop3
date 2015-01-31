@@ -97,7 +97,7 @@ public:
      */
     const char* QUIT();
     
-    const char* displaySum();
+    const char* displaySum();//displays the user all the massages, including those who "marked" for deletion (option 4 in the menu)
     
 };
 #endif /* defined(__pop3__Pop3Adaptor__) */

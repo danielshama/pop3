@@ -44,7 +44,6 @@ const char* Pop3Adaptor::PASS (const string password)
 
 const char* Pop3Adaptor::STAT ()
 {
-    //_user->get_mails()->prinall();
     int mailBoxSize =_user->get_mails()->getAmount();
     _result.assign("+OK ");
     _result += to_string(mailBoxSize);
@@ -52,7 +51,7 @@ const char* Pop3Adaptor::STAT ()
     long long int _size = 0;
     for (int i = 1; i <= mailBoxSize; ++i)
     {
-        _size += sizeof(_user->get_mails()->getObj(i));
+        _size += _user->get_mails()->getObj(i).getMsg().size();
     }
     _result += to_string(_size);
     return _result.c_str();
@@ -69,7 +68,7 @@ const char* Pop3Adaptor::LIST()
     {
         _result += to_string(i);
         _result += " ";
-        _result += to_string(sizeof(_user->get_mails()->getObj(i)));
+        _result += to_string(_user->get_mails()->getObj(i).getMsg().size());
         _result += "\n";
     }
     return _result.c_str();
@@ -145,6 +144,9 @@ const char* Pop3Adaptor::displaySum()
              _result += "  text: ";
              _result += _user->get_mails()->getObj(i).getMsg().substr(0,5);
              _result += "... ";
+             _result += "(";
+             _result += to_string(_user->get_mails()->getObj(i).getMsg().size());
+             _result += "kb) ";
              if(_user->get_mails()->ifForDel(i)){
                  _result += "(Marked for delete).";
              }
