@@ -38,3 +38,13 @@ const string& MailMessage::fromWho(){
     return _from;
 }
 
+unsigned long MailMessage::get_size()
+{
+    unsigned long size = _data.size();
+    size += _from.size();
+    size += _to.size();
+    size += sizeof(int);
+    size += sizeof(DateTime);
+    return size;
+}
+

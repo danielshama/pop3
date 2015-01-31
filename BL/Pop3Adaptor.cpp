@@ -48,11 +48,10 @@ const char* Pop3Adaptor::STAT ()
     _result.assign("+OK ");
     _result += to_string(mailBoxSize);
     _result += " ";
-    long long int _size = 0;
+    unsigned long _size = 0;
     for (int i = 1; i <= mailBoxSize; ++i)
     {
-        _size += _user->get_mails()->getObj(i).getMsg().size();
-        
+        _size += _user->get_mails()->getObj(i).get_size();
     }
     _result += to_string(_size);
     return _result.c_str();
@@ -69,7 +68,7 @@ const char* Pop3Adaptor::LIST()
     {
         _result += to_string(i);
         _result += " ";
-        _result += to_string(_user->get_mails()->getObj(i).getMsg().size());
+        _result += to_string(_user->get_mails()->getObj(i).get_size());
         _result += "\n";
     }
     return _result.c_str();
@@ -146,8 +145,8 @@ const char* Pop3Adaptor::displaySum()
              _result += _user->get_mails()->getObj(i).getMsg().substr(0,5);
              _result += "... ";
              _result += "(";
-             _result += to_string(_user->get_mails()->getObj(i).getMsg().size());
-             _result += "kb) ";
+             _result += to_string(_user->get_mails()->getObj(i).get_size());
+             _result += "bytes) ";
              if(_user->get_mails()->ifForDel(i)){
                  _result += "(Marked for delete).";
              }

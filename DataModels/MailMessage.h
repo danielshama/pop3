@@ -26,6 +26,7 @@ public:
     const string& fromWho();
     const string getMsgTime();
     int getId();
+    unsigned long get_size();
 };
 
 #endif /* defined(__pop3__MailMessage__) */
