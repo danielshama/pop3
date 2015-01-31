@@ -43,7 +43,7 @@ void DataReader::readFromData(){
                     from = strtok(NULL,", \n\r");
                     to = strtok(NULL,", \n\r");;
                     receivedDate = strtok(NULL,", \n\r");
-                    msgContent = strtok(NULL,"\r\n");
+                    msgContent = strtok(NULL,", \r\n");
                     
                     DateTime tmpDate = calculDateTime(receivedDate);
                     MailMessage mailMsg(msgID,from,to,msgContent,tmpDate);
@@ -122,7 +122,7 @@ void DataReader::upDateData(){
     remove(dataAddres.c_str());
     rename("temp.txt",dataAddres.c_str());
     delete []  ids;
-    cout << "delete all marks msgs" << endl;
+    cout << "delete all marked msgs" << endl;
 }
 User* DataReader::getUser(){
     return &_user;

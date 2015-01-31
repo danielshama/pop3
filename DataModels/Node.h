@@ -10,7 +10,7 @@
 #define __pop3__Node__
 
 #include <stdio.h>
-//node
+//each Node will hold massage
 template <class T>
 class Node
 {

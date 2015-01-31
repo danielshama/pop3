@@ -13,6 +13,8 @@
 #include "List.h"
 #include "MailMessage.h"
 
+//the user class holds a generic list class which contains all the massages tha belongs to this specific user.
+    //the massages represent as "Nodes" classes
 
 class User
 {

@@ -14,6 +14,8 @@
 #include "User.h"
 #include "List.h"
 
+//reads all the data from the "example.txt" file and puts it into the variables/classes
+
 class DataReader{
 private:
     const string dataAddres;
