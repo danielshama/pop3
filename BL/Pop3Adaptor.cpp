@@ -123,7 +123,7 @@ const char* Pop3Adaptor::RSET()
 
 const char* Pop3Adaptor::QUIT()
 {
-    _dataRe->upDateData();
+    _dataRe.upDateData();
     _user->get_mails()->remove();
     _result.assign("+OK");
     return _result.c_str();
